@@ -1,0 +1,103 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = "Jetzt Kennenlerngespräch vereinbaren",
+  subtitle = "Schneller geht es nicht: Einfach Namen, E-Mail und Nachricht hinterlassen – wir melden uns schnellstmöglich bei Dir!"
+} = Astro.props;
+---
+
+<div class="relative bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-10 shadow-2xl backdrop-blur-xl">
+  <!-- Glowing subtle gradient accent -->
+  <div class="absolute -top-10 -right-10 w-48 h-48 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative">
+    <div class="mb-8 text-center sm:text-left">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+        Kostenlos & unverbindlich
+      </span>
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">{title}</h3>
+      <p class="mt-2 text-sm sm:text-base text-slate-400 leading-relaxed">{subtitle}</p>
+    </div>
+
+    <form id="contact-form" class="space-y-5" action="mailto:hallo@sichtbarmitki.agency" method="POST" enctype="text/plain">
+      <div>
+        <label for="name" class="block text-sm font-medium text-slate-300 mb-1.5">Dein Name *</label>
+        <input
+          type="text"
+          id="name"
+          name="Name"
+          required
+          placeholder="z. B. Max Mustermann"
+          class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+        />
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium text-slate-300 mb-1.5">Deine E-Mail-Adresse *</label>
+        <input
+          type="email"
+          id="email"
+          name="Email"
+          required
+          placeholder="name@unternehmen.de"
+          class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+        />
+      </div>
+
+      <div>
+        <label for="phone" class="block text-sm font-medium text-slate-300 mb-1.5">Telefonnummer (optional)</label>
+        <input
+          type="tel"
+          id="phone"
+          name="Telefon"
+          placeholder="+49 123 456789"
+          class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+        />
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm font-medium text-slate-300 mb-1.5">Deine Nachricht / Dein Anliegen *</label>
+        <textarea
+          id="message"
+          name="Nachricht"
+          rows="4"
+          required
+          placeholder="Wie können wir dir helfen? (z. B. Website, SEO, KI-Automatisierung)"
+          class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-y"
+        ></textarea>
+      </div>
+
+      <div class="flex items-start gap-2.5 pt-1">
+        <input
+          type="checkbox"
+          id="privacy"
+          required
+          class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-950 text-blue-600 focus:ring-blue-500"
+        />
+        <label for="privacy" class="text-xs text-slate-400 leading-snug">
+          Ich habe die <a href="/datenschutz" class="text-blue-400 hover:underline">Datenschutzerklärung</a> zur Kenntnis genommen und stimme zu, dass meine Angaben zur Kontaktaufnahme gespeichert werden.
+        </label>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full py-4 px-6 rounded-xl text-base font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-lg shadow-blue-500/25 transition-all hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
+      >
+        <span>Anfrage absenden</span>
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </button>
+
+      <p class="text-center text-xs text-slate-500">
+        Schnelle Antwort in der Regel innerhalb von 24 Stunden.
+      </p>
+    </form>
+  </div>
+</div>

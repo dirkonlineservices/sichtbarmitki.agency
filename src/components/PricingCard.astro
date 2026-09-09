@@ -1,0 +1,72 @@
+---
+interface Props {
+  title: string;
+  price: string;
+  period?: string;
+  description: string;
+  features: string[];
+  popular?: boolean;
+  ctaText?: string;
+  ctaLink?: string;
+}
+
+const {
+  title,
+  price,
+  period = "",
+  description,
+  features,
+  popular = false,
+  ctaText = "Jetzt anfragen",
+  ctaLink = "/contact"
+} = Astro.props;
+---
+
+<div class={`relative rounded-2xl p-8 flex flex-col justify-between transition-all duration-300 ${
+  popular
+    ? 'bg-gradient-to-b from-blue-900/40 via-slate-900/90 to-slate-900 border-2 border-blue-500/80 shadow-2xl shadow-blue-500/20 scale-105 z-10'
+    : 'bg-slate-900/70 border border-slate-800 hover:border-slate-700 shadow-xl'
+}`}>
+  {popular && (
+    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full text-xs font-bold uppercase tracking-wider text-white shadow-md">
+      Sehr beliebt
+    </div>
+  )}
+
+  <div>
+    <div class="mb-6">
+      <h3 class="text-xl font-bold text-white tracking-tight">{title}</h3>
+      <p class="mt-2 text-sm text-slate-400 min-h-[40px]">{description}</p>
+    </div>
+
+    <div class="mb-8 flex items-baseline gap-1">
+      <span class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">{price}</span>
+      {period && <span class="text-sm font-medium text-slate-400">{period}</span>}
+    </div>
+
+    <div class="space-y-3.5 mb-8">
+      <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Leistungen inklusive:</p>
+      <ul class="space-y-3">
+        {features.map((feature) => (
+          <li class="flex items-start gap-3 text-sm text-slate-300">
+            <svg class="w-5 h-5 text-blue-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <a
+    href={ctaLink}
+    class={`w-full py-3.5 px-6 rounded-xl text-center text-sm font-bold transition-all shadow-md ${
+      popular
+        ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-blue-500/25 hover:scale-[1.02]'
+        : 'bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 hover:border-slate-600'
+    }`}
+  >
+    {ctaText}
+  </a>
+</div>

@@ -1,0 +1,325 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+
+const flagshipProject = {
+  title: "Flow der Stille – Web- & App-Entwicklung",
+  url: "https://flow-der-stille.de",
+  domain: "flow-der-stille.de",
+  logo: "/flow-der-stille-logo.png",
+  tag: "Flagship Projekt • Web & App",
+  summary: "Moderne, responsive Web- & App-Plattform für geführte Meditationen, Achtsamkeitsübungen und Vagusnerv-Entspannung.",
+  description: "Für „Flow der Stille“ haben wir eine ganzheitliche Webapplikation (PWA / App) konzipiert und realisiert. Neben einem reibungslosen, maßgeschneiderten HTML5-Player für Audio-Streaming wurde eine native Datenbankanbindung mit vollautomatisierten Prozessen integriert – ohne externe Drittanbieter-Tools wie n8n oder Zapier. Architektur, Strategie, Design und Umsetzung kamen dabei komplett aus einer Hand.",
+  highlights: [
+    "Maßgeschneiderter HTML5-Audio-Player für lückenloses Meditations-Streaming",
+    "Direkte Datenbankanbindung & native Backend-Prozesse (ohne Drittanbieter wie n8n)",
+    "Eigene Progressive Web App (PWA) für Desktop, Android & iOS",
+    "DSGVO-konformes Google Consent Mode v2 & Tag Manager Setup",
+    "Vollständige Schema.org / JSON-LD Auszeichnung für Google & KI-Suchmaschinen",
+    "Architektur, Konzeption & Entwicklung 100% aus einer Hand"
+  ]
+};
+
+const otherProjects = [
+  {
+    title: "Lokale SEO & Neukundengewinnung für Handwerksbetrieb",
+    tag: "Lokale SEO & Google Maps",
+    description: "Gezielte Optimierung des regionalen Google-Unternehmensprofils und Aufbau branchenspezifischer Landingpages für den Großraum Stuttgart.",
+    results: ["Top-3-Platzierung für Hauptsuchbegriffe", "+140% mehr Anrufe & Anfragen", "DSGVO-konformes Conversion-Tracking"]
+  },
+  {
+    title: "Website-Relaunch & Baukasten-Ablöse für Beratungspraxis",
+    tag: "Web-Relaunch & Speed",
+    description: "Ablösung eines schwerfälligen Baukastensystems durch handgecodeten, modernen Web-Code mit klarem Fokus auf Vertrauensaufbau und Erstgespräch-Termine.",
+    results: ["Google Lighthouse Score 100/100", "Ladezeit unter 0,8 Sekunden", "Verdopplung der Terminanfragen"]
+  },
+  {
+    title: "KI-gestützte Lead-Vorqualifizierung & Automatisierung",
+    tag: "KI-Workflows & Automatisierung",
+    description: "Automatisierter Workflow zur Filterung und Vorabprüfung eingehender Kundenwünsche – spart wöchentlich mehrere Stunden manuelle E-Mail-Sortierung.",
+    results: ["80% Zeitersparnis bei der Erstqualifizierung", "Schnellere Reaktionszeit für Kunden", "Keine Software-Abo-Kosten"]
+  }
+];
+
+const clientReviews = [
+  {
+    quote: "Dirk hat mit der technischen Umsetzung von Flow der Stille unsere Vision perfekt ins Web und als App gebracht. Vom Bau des maßgeschneiderten Audio-Players über die Datenbank bis hin zur DSGVO-Sicherheit lief alles reibungslos aus einer Hand. Die Seite läuft extrem schnell und stabil!",
+    author: "Jacqueline Schmetzer",
+    role: "Autorin & Gründerin von Flow der Stille",
+    rating: 5
+  },
+  {
+    quote: "Vor unserer Zusammenarbeit kamen über Google kaum Anfragen. Nach der lokalen SEO-Optimierung und der Überarbeitung unserer Website rufen jede Woche neue Kunden an. Die Investition hat sich im ersten Monat amortisiert.",
+    author: "Marc B.",
+    role: "Geschäftsführer Meisterbetrieb, Stuttgart",
+    rating: 5
+  },
+  {
+    quote: "Endlich jemand, der Klartext redet und keine überteuerten Agentur-Phantasiepreise aufruft. Dirk hat unsere Website blitzschnell aufgesetzt und alle DSGVO-Vorgaben sauber integriert. Absolute Weiterempfehlung!",
+    author: "Dr. med. Suzan M.",
+    role: "Praxisinhaberin & Dozentin",
+    rating: 5
+  },
+  {
+    quote: "Der Stundensatz und die einmalige Analyse waren jeden Cent wert. Innerhalb weniger Tage hatten wir einen glasklaren Fahrplan und sauberen Code ohne lästige Baukasten-Limits.",
+    author: "Thomas W.",
+    role: "Unternehmensberater",
+    rating: 5
+  }
+];
+---
+
+<Layout
+  title="Referenzen & Über uns | sichtbarmitKi.agency"
+  description="Laufende Kundenprojekte und echte Ergebnisse: Von der Web- und App-Entwicklung für flow-der-stille.de bis zu lokaler SEO und KI-Automatisierung für KMU."
+>
+  <!-- Header Section -->
+  <section class="relative pt-24 pb-16 md:pt-32 md:pb-20 border-b border-slate-800/80 bg-gradient-to-b from-slate-950 via-slate-900/60 to-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl mx-auto">
+      <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-6">
+        Echte Praxis & Messbare Ergebnisse
+      </span>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight">
+        Über uns & <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">unsere Referenzen</span>
+      </h1>
+      <p class="mt-6 text-lg text-slate-300 leading-relaxed">
+        Keine Agentur-Floskeln, sondern sichtbare Erfolge. Hier sehen Sie ausgewählte Arbeiten – von komplexen Web- und App-Entwicklungen mit nativer Datenbankarchitektur bis zu regionalen SEO-Erfolgen für KMU.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission & Philosophie Section: Warum ich das mache -->
+  <section class="py-16 bg-gradient-to-b from-slate-900/50 via-slate-900/30 to-slate-950 border-b border-slate-800/80">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-r from-blue-950/40 via-indigo-950/30 to-slate-900 border border-blue-500/30 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+        <div class="absolute -right-20 -top-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-blue-500/15 text-blue-400 border border-blue-500/30 uppercase tracking-wider mb-6">
+            Meine Philosophie & Antrieb
+          </div>
+
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-snug">
+            Warum ich das mache: <br class="hidden sm:inline"/>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">
+              Maximaler Erfolg bei fairem Budget – erst beweisen, dann wachsen.
+            </span>
+          </h2>
+
+          <div class="mt-6 space-y-4 text-slate-300 text-base sm:text-lg leading-relaxed">
+            <p>
+              Da draußen arbeiten mittlerweile fast alle Agenturen mit KI. Doch anstatt diese gewaltigen Effizienz- und Zeitvorteile an ihre Kunden weiterzugeben, verlangen viele weiterhin überzogene Stundensätze von 150 € bis über 220 € und binden Unternehmen in starre Knebelverträge.
+            </p>
+            <p>
+              <strong class="text-white">Ich mache das bewusst anders.</strong> Ich setze moderne KI und sauberen Code genauso intensiv ein – aber mit einem klaren Ziel: Meinen Kunden den größtmöglichen geschäftlichen Nutzen und maximale Sichtbarkeit zu verschaffen, <strong class="text-blue-300">bei überschaubarem und fairem Geldeinsatz</strong>.
+            </p>
+            <p>
+              Klar: Professionelle Arbeit und Technologie kosten Geld. Aber warum sollten Sie direkt tausende Euro ins Ungewisse investieren? Mein Ansatz lautet: <strong class="text-white">Erst schlank und kostengünstig starten</strong>, die Sichtbarkeit aufbauen und handfeste Ergebnisse liefern. Wenn es nachweislich funktioniert und die ersten Neukunden kommen, können Sie Ihr System jederzeit ausbauen, vergrößern und gezielt reinvestieren, um weiter zu wachsen.
+            </p>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-bold text-white shadow-md">
+                DS
+              </div>
+              <div>
+                <p class="text-sm font-bold text-white">Dirk Schmetzer</p>
+                <p class="text-xs text-slate-400">Gründer von DS Online Services & SichtbarMitKI.agency</p>
+              </div>
+            </div>
+            <a
+              href="/contact"
+              class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 transition-all shadow-md shadow-blue-500/20"
+            >
+              Unverbindlich austauschen
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flagship Reference: flow-der-stille.de -->
+  <section class="py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative bg-gradient-to-br from-blue-950/40 via-slate-900/90 to-slate-900 border-2 border-blue-500/50 rounded-3xl p-8 sm:p-12 shadow-2xl shadow-blue-500/10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Left Content -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="px-3.5 py-1 rounded-full text-xs font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30 uppercase tracking-wider">
+                {flagshipProject.tag}
+              </span>
+              <span class="text-xs text-slate-400 font-mono">Live unter: {flagshipProject.domain}</span>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-2xl bg-slate-950/90 border border-blue-500/30 p-2.5 shadow-lg flex items-center justify-center shrink-0">
+                <img src={flagshipProject.logo} alt="Flow der Stille Logo" class="w-full h-full object-contain" />
+              </div>
+              <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                {flagshipProject.title}
+              </h2>
+            </div>
+
+            <p class="text-base sm:text-lg text-slate-300 font-medium leading-relaxed">
+              {flagshipProject.summary}
+            </p>
+
+            <p class="text-sm text-slate-400 leading-relaxed">
+              {flagshipProject.description}
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              {flagshipProject.highlights.map((h) => (
+                <div class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-200">
+                  <span class="text-emerald-400 font-bold mt-0.5">✓</span>
+                  <span>{h}</span>
+                </div>
+              ))}
+            </div>
+
+            <div class="pt-4 flex flex-wrap items-center gap-4">
+              <a
+                href={flagshipProject.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-md shadow-blue-500/20 transition-all hover:scale-[1.02]"
+              >
+                <span>Live-Plattform öffnen</span>
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+              <a
+                href="/contact"
+                class="inline-flex items-center px-6 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700 border border-slate-700 transition-all"
+              >
+                Ähnliches Projekt anfragen
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Showcase Card -->
+          <div class="lg:col-span-5">
+            <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-5">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <div class="flex items-center gap-3">
+                  <img src={flagshipProject.logo} alt="Flow der Stille Logo" class="w-8 h-8 object-contain" />
+                  <span class="text-sm font-bold text-white">Projekt-Architektur</span>
+                </div>
+                <span class="text-xs text-emerald-400 font-bold bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
+                  Full-Stack
+                </span>
+              </div>
+              <ul class="space-y-3.5 text-xs text-slate-300">
+                <li class="flex items-center justify-between">
+                  <span class="text-slate-400">Audio-Engine:</span>
+                  <span class="font-medium text-white">Eigener HTML5-Player</span>
+                </li>
+                <li class="flex items-center justify-between">
+                  <span class="text-slate-400">Backend & Daten:</span>
+                  <span class="font-medium text-white">Eigene Datenbank & native Workflows</span>
+                </li>
+                <li class="flex items-center justify-between">
+                  <span class="text-slate-400">Drittanbieter:</span>
+                  <span class="font-medium text-emerald-400">Kein n8n / Keine Abo-Kosten</span>
+                </li>
+                <li class="flex items-center justify-between">
+                  <span class="text-slate-400">Plattform:</span>
+                  <span class="font-medium text-white">Progressive Web App (PWA)</span>
+                </li>
+                <li class="flex items-center justify-between">
+                  <span class="text-slate-400">Datenschutz:</span>
+                  <span class="font-medium text-white">Consent Mode v2</span>
+                </li>
+              </ul>
+              <div class="pt-4 border-t border-slate-800/80 text-center">
+                <p class="text-xs text-slate-400 italic">
+                  „Höchste Stabilität, native Prozesse und unterbrechungsfreier Klang für Tausende Meditationsstunden.“
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- More Projects Grid -->
+  <section class="py-16 bg-slate-900/30 border-t border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <h2 class="text-3xl font-extrabold text-white tracking-tight">Weitere erfolgreiche Kundenprojekte</h2>
+        <p class="mt-3 text-slate-400 text-sm sm:text-base">
+          Jede Lösung ist maßgeschneidert auf das Geschäftsmodell und die Zielgruppe des Kunden.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {otherProjects.map((proj, idx) => (
+          <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-8 flex flex-col justify-between hover:border-slate-700 transition-all hover:shadow-xl">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+                  {proj.tag}
+                </span>
+                <span class="text-xs text-slate-500 font-semibold">0{idx + 2}</span>
+              </div>
+
+              <h3 class="text-lg font-bold text-white tracking-tight mb-3">{proj.title}</h3>
+              <p class="text-sm text-slate-400 leading-relaxed mb-6">{proj.description}</p>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 space-y-2">
+              <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Ergebnis:</span>
+              <ul class="space-y-1.5">
+                {proj.results.map((res) => (
+                  <li class="flex items-center gap-2 text-xs text-slate-300">
+                    <span class="text-emerald-400 font-bold">✓</span> {res}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Reviews -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Kundenstimmen</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Das sagen Unternehmer über die Zusammenarbeit
+        </h2>
+        <p class="mt-3 text-slate-400">
+          Ehrliche Bewertungen aus echter Zusammenarbeit in Web- & App-Entwicklung, SEO und KI.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        {clientReviews.map((r) => (
+          <TestimonialCard quote={r.quote} author={r.author} role={r.role} rating={r.rating} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <ContactForm
+      title="Möchten auch Sie messbar sichtbarer werden?"
+      subtitle="Ob neue Website, eigene Web-App oder lokale Google-Dominanz: Sprechen Sie direkt mit Dirk Schmetzer."
+    />
+  </section>
+</Layout>

@@ -1,0 +1,267 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PricingCard from '../components/PricingCard.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const pricingPlans = [
+  {
+    title: "KI- & Strategie-Beratung",
+    price: "100 €",
+    period: "pro Stunde",
+    description: "Individuelles 1:1 Sparring für Inhaber und Entscheider. Wir finden die lukrativsten Hebel für Ihr Geschäft.",
+    features: [
+      "Persönliche Bedarfs- & Prozessanalyse",
+      "Identifikation von KI- & Automatisierungspotenzialen",
+      "Klare Software- und Tool-Empfehlungen",
+      "Datenschutz- & DSGVO-Sicherheitscheck",
+      "Flexibel und stundengenau ohne Mindestabnahme"
+    ],
+    popular: false,
+    ctaText: "Beratung anfragen",
+    ctaLink: "/contact"
+  },
+  {
+    title: "Umfassende Potenzial-Analyse",
+    price: "600 €",
+    period: "einmaliger Festpreis",
+    description: "Der ideale Startpunkt für messbare Sichtbarkeit: Kompletter 360°-Check Ihres aktuellen digitalen Auftritts.",
+    features: [
+      "Detaillierte Analyse Ihrer Website & aktuellen Google-Positionen",
+      "Lokaler Sichtbarkeits- & Konkurrenz-Vergleich",
+      "Prüfung der Auffindbarkeit in Google Maps & KI-Assistenten",
+      "Aufdecken von Ladezeit- & DSGVO-Schwachstellen",
+      "Schriftlicher Maßnahmenplan + 60 Min. persönliches Auswertungsgespräch"
+    ],
+    popular: true,
+    ctaText: "Potenzial-Analyse sichern",
+    ctaLink: "/contact"
+  },
+  {
+    title: "Web-Umsetzung & Entwicklung",
+    price: "85 €",
+    period: "pro Stunde",
+    description: "Handfeste Realisierung: Moderne Web- & App-Entwicklung, OnPage-SEO, GA4-Tracking und Workflows.",
+    features: [
+      "Programmierung mit modernem Code (Astro / HTML / Tailwind)",
+      "Ablösung träger Baukästen für blitzschnelle Ladezeiten",
+      "DSGVO-konformes Google Tracking (Consent Mode v2)",
+      "Einrichtung lokaler SEO-Strukturen & Schema.org",
+      "Transparente Abrechnung ohne Mindestlaufzeit"
+    ],
+    popular: false,
+    ctaText: "Umsetzung anfragen",
+    ctaLink: "/contact"
+  }
+];
+
+const marketComparison = [
+  {
+    kriterium: "Stundensatz Beratung & Strategie",
+    markt: "140 € – 220 € / Std.",
+    wir: "100 € / Std.",
+    vorteil: "Faires Honorar auf Augenhöhe speziell für KMU"
+  },
+  {
+    kriterium: "Stundensatz Web- & Code-Umsetzung",
+    markt: "110 € – 160 € / Std.",
+    wir: "85 € / Std.",
+    vorteil: "Hochmoderner Code ohne teuren Agentur-Wasserkopf"
+  },
+  {
+    kriterium: "Umfassende Website- & SEO-Analyse",
+    markt: "1.200 € – 2.800 €",
+    wir: "600 € Festpreis",
+    vorteil: "Inkl. 60 Min. 1:1 Besprechung & individuellem Maßnahmenplan"
+  },
+  {
+    kriterium: "Vertragsbindung / Knebelverträge",
+    markt: "Oft 6 bis 24 Monate Mindestlaufzeit",
+    wir: "0 Monate (100% flexibel)",
+    vorteil: "Sie bleiben nur, weil Sie mit dem Ergebnis zufrieden sind"
+  },
+  {
+    kriterium: "Code-Eigentum & Unabhängigkeit",
+    markt: "Oft geschlossene Baukästen oder teure Bindung",
+    wir: "100% Ihr Eigentum",
+    vorteil: "Sie erhalten sauberen Quellcode, den Sie überall betreiben können"
+  },
+  {
+    kriterium: "Fester Ansprechpartner",
+    markt: "Wechselnde Junioren / anonyme Ticket-Systeme",
+    wir: "Direkt Dirk Schmetzer",
+    vorteil: "Persönliche Betreuung, schnelle Wege, keine Reibungsverluste"
+  }
+];
+
+const faqs = [
+  {
+    question: "Warum sind Ihre Preise spürbar günstiger als bei klassischen Großagenturen?",
+    answer: "Klassische Agenturen müssen teure Büropaläste, Projektmanager und Vertriebsteams über die Stundensätze ihrer Kunden finanzieren. Bei DS Online Services arbeiten Sie direkt mit dem Umsetzer. Sie zahlen reine Fachkompetenz und greifbare Resultate statt Agentur-Wasserkopf."
+  },
+  {
+    question: "Gibt es versteckte Zusatzkosten oder monatliche Zwangsabos?",
+    answer: "Nein. Wir stehen für absolute Transparenz. Sie zahlen nur die vereinbarten Leistungen bzw. gebuchten Stunden. Es gibt keine versteckten Folgekosten oder monatliche Zwangsgebühren."
+  },
+  {
+    question: "Wie wird die Umsatzsteuer abgerechnet?",
+    answer: "Gemäß § 19 UStG (Kleinunternehmerregelung) wird keine Umsatzsteuer berechnet und diese daher auf Rechnungen auch nicht gesondert ausgewiesen. Der genannte Betrag ist der tatsächliche Endpreis."
+  },
+  {
+    question: "Wie starten wir am besten?",
+    answer: "Am besten vereinbaren wir ein kurzes 15-minütiges Kennenlerngespräch. Alternativ ist die einmalige Potenzial-Analyse für 600 € der ideale Einstieg, um den Status quo Ihrer Website und Sichtbarkeit fundiert offenzulegen."
+  }
+];
+---
+
+<Layout
+  title="Preise & Marktvergleich | sichtbarmitKi.agency"
+  description="Unsere Preise im transparenten Marktvergleich: Beratung 100€/h, Umsetzung 85€/h und Potenzial-Analyse für 600€. Keine Knebelverträge, 100% faire Konditionen."
+>
+  <!-- Header Section -->
+  <section class="relative pt-24 pb-16 md:pt-32 md:pb-20 border-b border-slate-800/80 bg-gradient-to-b from-slate-950 via-slate-900/60 to-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl mx-auto">
+      <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-6">
+        Transparenz ohne Agentur-Aufschläge
+      </span>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight">
+        Faire Preise. <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">Messbarer Wert.</span>
+      </h1>
+      <p class="mt-6 text-lg text-slate-300 leading-relaxed">
+        Vergleichen Sie selbst: Wir bieten Ihnen professionelle Webentwicklung, SEO und KI-Beratung zu ehrlichen Konditionen – ohne versteckte Kosten und ohne starre Knebelverträge.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pricing Cards Grid -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        {pricingPlans.map((plan) => (
+          <PricingCard {...plan} />
+        ))}
+      </div>
+
+      <div class="mt-8 text-center text-xs text-slate-400">
+        * Gemäß § 19 UStG wird keine Umsatzsteuer berechnet und diese daher auch nicht gesondert ausgewiesen (Kleinunternehmerregelung).
+      </div>
+    </div>
+  </section>
+
+  <!-- Market Comparison Table Section -->
+  <section class="py-20 bg-slate-900/50 border-y border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Marktübersicht</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Marktvergleich: Klassische Agenturen vs. SichtbarMitKI.agency
+        </h2>
+        <p class="mt-3 text-slate-400 text-sm sm:text-base">
+          Was zahlen Sie am Markt – und welchen Mehrwert erhalten Sie bei uns? Die Fakten im direkten Überblick:
+        </p>
+      </div>
+
+      <!-- Philosophy Callout -->
+      <div class="mb-12 max-w-4xl mx-auto bg-gradient-to-r from-blue-950/40 via-indigo-950/25 to-slate-900 border border-blue-500/30 rounded-2xl p-6 sm:p-8 text-center sm:text-left flex flex-col sm:flex-row items-center gap-6 shadow-xl">
+        <div class="w-14 h-14 rounded-2xl bg-blue-600/20 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0">
+          <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-white">Unsere Philosophie: Erst beweisen, dann skalieren</h3>
+          <p class="text-sm text-slate-300 mt-1.5 leading-relaxed">
+            Da draußen arbeiten mittlerweile fast alle Agenturen mit KI. Doch wir nutzen modernste KI und sauberen Code, um unseren Kunden maximale Sichtbarkeit und greifbare Ergebnisse bei überschaubarem Geldeinsatz zu ermöglichen. Starten Sie kostengünstig und schlank – wenn das System funktioniert und neue Kunden bringt, können Sie jederzeit gezielt reinvestieren, ausbauen und größer werden.
+          </p>
+        </div>
+      </div>
+
+      <!-- Comparison Desktop & Mobile Table -->
+      <div class="overflow-x-auto">
+        <div class="inline-block min-w-full align-middle">
+          <div class="overflow-hidden border border-slate-800 rounded-2xl shadow-xl bg-slate-950/80">
+            <table class="min-w-full divide-y divide-slate-800">
+              <thead class="bg-slate-900/90">
+                <tr>
+                  <th scope="col" class="py-4 px-6 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">
+                    Leistung / Kriterium
+                  </th>
+                  <th scope="col" class="py-4 px-6 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">
+                    Typische Marktpreise
+                  </th>
+                  <th scope="col" class="py-4 px-6 text-left text-xs font-bold text-blue-400 uppercase tracking-wider bg-blue-950/30 border-x border-blue-500/20">
+                    SichtbarMitKI.agency
+                  </th>
+                  <th scope="col" class="py-4 px-6 text-left text-xs font-bold text-slate-300 uppercase tracking-wider hidden sm:table-cell">
+                    Ihr konkreter Vorteil
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60 text-sm">
+                {marketComparison.map((row) => (
+                  <tr class="hover:bg-slate-900/40 transition-colors">
+                    <td class="py-4 px-6 font-semibold text-white">
+                      {row.kriterium}
+                    </td>
+                    <td class="py-4 px-6 text-slate-400 font-mono">
+                      {row.markt}
+                    </td>
+                    <td class="py-4 px-6 font-bold text-white bg-blue-950/20 border-x border-blue-500/20">
+                      <span class="text-blue-400">{row.wir}</span>
+                    </td>
+                    <td class="py-4 px-6 text-slate-300 hidden sm:table-cell">
+                      <span class="inline-flex items-center gap-1.5">
+                        <span class="text-emerald-400 font-bold">✓</span> {row.vorteil}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Extra Value Box -->
+      <div class="mt-12 bg-gradient-to-r from-blue-950/40 via-indigo-950/30 to-slate-900 border border-blue-500/30 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 class="text-xl font-bold text-white">Bereit für den ersten Schritt?</h3>
+          <p class="text-sm text-slate-300 mt-1">
+            Mit der <strong class="text-white">Potenzial-Analyse für 600 €</strong> decken wir die ungenutzten Sichtbarkeits-Chancen Ihres Unternehmens transparent auf.
+          </p>
+        </div>
+        <a
+          href="/contact"
+          class="px-8 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-lg shadow-blue-500/25 shrink-0 transition-all hover:scale-105"
+        >
+          Analyse unverbindlich anfragen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white text-center mb-12 tracking-tight">
+        Häufig gestellte Fragen zu Konditionen & Ablauf
+      </h2>
+
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-6 sm:p-8">
+            <h3 class="text-base sm:text-lg font-bold text-white mb-2">{faq.question}</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <ContactForm
+      title="Haben Sie ein konkretes Projekt?"
+      subtitle="Schildern Sie uns kurz Ihre Anforderungen – wir erstellen Ihnen gerne ein faires, maßgeschneidertes Angebot."
+    />
+  </section>
+</Layout>

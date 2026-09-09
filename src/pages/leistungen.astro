@@ -1,0 +1,133 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+
+const servicesList = [
+  {
+    category: "Branding & Design",
+    title: "Individuelles Logo-Design & Markenidentität",
+    description: "Ein unverwechselbares Logo und ein konsistentes Erscheinungsbild schaffen sofortiges Vertrauen bei Neukunden. Wir entwickeln moderne, zeitlose Logos, die Ihre Unternehmenswerte präzise auf den Punkt bringen.",
+    points: [
+      "Individuelle Vektor-Logos (SVG, PDF, PNG für Web & Print)",
+      "Passende Farbpaletten & Typografie-Leitfäden",
+      "Optimiert für alle Bildschirme, Social Media & Visitenkarten",
+      "Uneingeschränkte Nutzungsrechte für Ihr Unternehmen"
+    ]
+  },
+  {
+    category: "Web- & Appentwicklung",
+    title: "Moderne Webseiten, Apps & individuelle Player",
+    description: "Keine langsamen Standard-Baukästen mehr: Wir bauen für Sie hochperformante Webseiten, Progressive Web Apps (PWA) mit nativer Datenbankanbindung und maßgeschneiderten HTML5-Medienplayern (wie bei flow-der-stille.de) – vollkommen ohne teure Drittanbieter-Abos wie n8n oder Zapier.",
+    points: [
+      "100% maßgeschneiderter, sauberer Code (Astro / HTML5 / Tailwind)",
+      "Native Datenbankanbindung & automatisierte Backend-Prozesse",
+      "Individuelle Audio-/Medien-Player & PWA-Entwicklung",
+      "Optimale Ladezeiten (Google Core Web Vitals im grünen Bereich)",
+      "Einfache Pflege und maximale Unabhängigkeit"
+    ]
+  },
+  {
+    category: "Datenschutz & Analytics",
+    title: "DSGVO-konformes Tracking & Google Analytics",
+    description: "Verstehen, wer Ihre Website besucht, ohne rechtliche Abmahnrisiken. Wir richten rechtskonforme Cookie-Banner, Server-Side-Tracking oder datenschutzfreundliche Analyse-Tools sauber ein.",
+    points: [
+      "DSGVO-konforme Einrichtung von Google Analytics 4 (GA4)",
+      "Rechtssichere Cookie-Consent-Banner (Consent Mode v2)",
+      "Conversion-Tracking für Anrufe, Formulare & Terminanfragen",
+      "Transparente Monatsberichte über Besucher und Anfragen"
+    ]
+  },
+  {
+    category: "Suchmaschinenoptimierung",
+    title: "Lokale SEO & KI-gestützte Auffindbarkeit",
+    description: "Damit Kunden in Ihrer Region Sie sofort finden, wenn nach Ihren Leistungen gesucht wird – ob in der klassischen Google-Suche, auf Google Maps oder in modernen KI-Assistenten (ChatGPT, Perplexity).",
+    points: [
+      "Optimierung Ihres Google Unternehmensprofils (Google My Business)",
+      "Lokale Keyword-Recherche für Ihre Stadt und Einzugsgebiet",
+      "Strukturierte Daten (Schema.org) für Rich-Snippets in Suchmaschinen",
+      "KI-optimierte Texte, die sowohl Menschen als auch Algorithmen überzeugen"
+    ]
+  }
+];
+---
+
+<Layout
+  title="Professionelle Dienstleistungen für Logo, Web und SEO | sichtbarmitKi.agency"
+  description="Wir erstellen individuelle Logos, unterstützen bei Webseiten-Umsetzung, DSGVO-konformes Google Analytics Tracking und verbessern Ihre lokale Sichtbarkeit mit gezielten SEO-Maßnahmen."
+>
+  <!-- Header / Hero Section -->
+  <section class="relative pt-24 pb-16 md:pt-32 md:pb-24 border-b border-slate-800/80 bg-gradient-to-b from-slate-950 via-slate-900/60 to-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl mx-auto">
+      <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-6">
+        Ganzheitliche Begleitung
+      </span>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight">
+        Unsere Leistungen für Ihren <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">digitalen Erfolg</span>
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+        Von Logo-Design bis SEO: Logoerstellung, DSGVO-konformes Tracking, Webumsetzung und gezielte Maßnahmen für maximale Sichtbarkeit in Google und KI-Suchmaschinen.
+      </p>
+    </div>
+  </section>
+
+  <!-- Detailed Services Grid -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        {servicesList.map((service, index) => (
+          <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-8 sm:p-10 flex flex-col justify-between hover:border-slate-700 transition-all hover:shadow-xl hover:shadow-blue-500/5">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+                  {service.category}
+                </span>
+                <span class="text-2xl font-black text-slate-700">0{index + 1}</span>
+              </div>
+              <h3 class="text-2xl font-bold text-white tracking-tight mb-4">{service.title}</h3>
+              <p class="text-sm sm:text-base text-slate-400 leading-relaxed mb-6">{service.description}</p>
+              
+              <ul class="space-y-2.5 mb-8 border-t border-slate-800 pt-6">
+                {service.points.map((pt) => (
+                  <li class="flex items-start gap-2.5 text-sm text-slate-300">
+                    <svg class="w-4 h-4 text-blue-400 shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>{pt}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <a
+              href="/contact"
+              class="inline-flex items-center justify-center w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 transition-all"
+            >
+              Jetzt unverbindlich anfragen
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlight Quote -->
+  <section class="py-16 bg-slate-900/40 border-y border-slate-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <TestimonialCard
+        quote="Dank der Hilfe bei SEO und DSGVO-konformem Tracking hat sich unsere Sichtbarkeit deutlich verbessert. Fragen zu Logos, Web oder SEO wurden immer direkt und verständlich gelöst."
+        author="Suzan M."
+        role="Praxisinhaberin & Beraterin"
+        rating={5}
+      />
+    </div>
+  </section>
+
+  <!-- Contact CTA Form -->
+  <section class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <ContactForm
+      title="Fragen zu Logos, Web oder SEO?"
+      subtitle="Schreiben Sie uns – wir beraten Sie gern persönlich und finden die ideale Lösung für Ihren Betrieb."
+    />
+  </section>
+</Layout>
