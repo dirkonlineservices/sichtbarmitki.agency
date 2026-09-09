@@ -15,9 +15,14 @@ import {
   MapPin,
   ExternalLink,
   ChevronRight,
-  Database,
   SearchCheck,
-  Check
+  Check,
+  Smartphone,
+  Music,
+  Globe,
+  Radio,
+  Layers,
+  Star
 } from 'lucide-react';
 
 export default function App() {
@@ -86,6 +91,46 @@ export default function App() {
     }
   ];
 
+  const references = [
+    {
+      title: "Flow der Stille",
+      subtitle: "Android-App & Progressive Web App (PWA)",
+      domain: "flow-der-stille.de",
+      url: "https://flow-der-stille.de",
+      logo: "/flow-der-stille-logo.png",
+      badge: "Android-App & Web-Plattform",
+      badgeColor: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+      icon: Smartphone,
+      description:
+        "Vollständige Konzeption und technische Realisierung als native Android-App sowie performante Web-Plattform für geführte Meditationen und Achtsamkeits-Sessions.",
+      highlights: [
+        "Eigene native Android-App & PWA für unterbrechungsfreies Audio-Streaming",
+        "Maßgeschneiderter HTML5-Audio-Player mit Offline-Funktionalität",
+        "Direkte Cloud-Datenbankanbindung ohne Drittanbieter-Abo-Kosten (kein n8n)",
+        "100% DSGVO-konform mit Google Consent Mode v2"
+      ],
+      tag: "Live-Projekt"
+    },
+    {
+      title: "MyMusicMoment24",
+      subtitle: "Exklusive Musikerlebnisse & Buchungsplattform",
+      domain: "mymusicmoment24.de",
+      url: "https://mymusicmoment24.de",
+      badge: "Web-Plattform & GEO",
+      badgeColor: "bg-purple-500/15 text-purple-400 border-purple-500/30",
+      icon: Music,
+      description:
+        "Moderne, conversion-optimierte Web-Präsenz und Buchungsplattform für maßgeschneiderte Musikmomente, Event-Begleitung und personalisierte Kompositionen.",
+      highlights: [
+        "Blitzschnelle Ladezeiten (Lighthouse Score 95+) für minimale Absprungraten",
+        "GEO-optimierte Inhaltsstruktur für Auffindbarkeit in ChatGPT, Gemini & Google",
+        "Reibungslose mobile User Experience & zielgerichtete Lead-Formulare",
+        "DSGVO-konformes Analytics-Setup zur messbaren Buchungsoptimierung"
+      ],
+      tag: "Live-Projekt"
+    }
+  ];
+
   const benefits = [
     {
       icon: ShieldCheck,
@@ -130,6 +175,7 @@ export default function App() {
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
             <a href="#services" className="hover:text-white transition-colors">Leistungen</a>
+            <a href="#referenzen" className="hover:text-white transition-colors">Referenzen</a>
             <a href="#vorteile" className="hover:text-white transition-colors">Vorteile</a>
             <a href="#kontakt" className="hover:text-white transition-colors">Kontakt</a>
           </nav>
@@ -207,7 +253,7 @@ export default function App() {
               </div>
               <div className="flex items-center justify-center gap-2">
                 <Check className="w-4 h-4 text-blue-400 shrink-0" />
-                <span>Direkter Expertenkontakt</span>
+                <span>Echte Kunden-Referenzen</span>
               </div>
             </div>
           </div>
@@ -278,8 +324,103 @@ export default function App() {
         </div>
       </section>
 
+      {/* Referenzen-Bereich (NEU) */}
+      <section id="referenzen" className="py-24 relative overflow-hidden bg-slate-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3.5 py-1 rounded-full">
+              Erprobte Kundenprojekte
+            </span>
+            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+              Echte Ergebnisse aus der Praxis
+            </h2>
+            <p className="mt-4 text-slate-400 text-base sm:text-lg">
+              Keine theoretischen Konzepte: Hier sehen Sie maßgeschneiderte Entwicklungen von nativen Android-Apps bis hin zu hochperformanten Web-Plattformen.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {references.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={idx}
+                  className="bg-gradient-to-br from-slate-900/90 via-slate-900/60 to-slate-950 border border-slate-800 hover:border-blue-500/40 rounded-3xl p-8 sm:p-10 shadow-xl hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Header */}
+                    <div className="flex items-center justify-between gap-4 mb-6">
+                      <span className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${item.badgeColor}`}>
+                        {item.badge}
+                      </span>
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-blue-400 transition-colors"
+                      >
+                        <span>{item.domain}</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+
+                    <div className="flex items-center gap-4 mb-5">
+                      {item.logo ? (
+                        <div className="w-14 h-14 rounded-2xl bg-slate-950 border border-slate-800 p-2 flex items-center justify-center shrink-0 shadow-md">
+                          <img src={item.logo} alt={`${item.title} Logo`} className="w-full h-full object-contain" />
+                        </div>
+                      ) : (
+                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 shadow-md">
+                          <Icon className="w-7 h-7" />
+                        </div>
+                      )}
+                      <div>
+                        <h3 className="text-2xl font-bold text-white tracking-tight">{item.title}</h3>
+                        <p className="text-xs sm:text-sm text-slate-400">{item.subtitle}</p>
+                      </div>
+                    </div>
+
+                    <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                      {item.description}
+                    </p>
+
+                    <div className="space-y-2.5 pt-4 border-t border-slate-800/80 mb-6">
+                      {item.highlights.map((highlight, hIdx) => (
+                        <div key={hIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                          <span>{highlight}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-slate-800 flex items-center justify-between gap-4">
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-bold text-white bg-slate-800/80 hover:bg-slate-700 px-4 py-2.5 rounded-xl border border-slate-700 transition-all hover:scale-[1.02]"
+                    >
+                      <span>Live ansehen</span>
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                    <a
+                      href="#kontakt"
+                      className="text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1"
+                    >
+                      <span>Ähnliches Projekt planen</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* 3. Vertrauensbereich / Vorteile */}
-      <section id="vorteile" className="py-24 relative overflow-hidden">
+      <section id="vorteile" className="py-24 bg-slate-900/30 border-t border-slate-800/80 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-bold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3.5 py-1 rounded-full">
@@ -363,7 +504,13 @@ export default function App() {
                     <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-blue-400 shrink-0">
                       <Mail className="w-4 h-4" />
                     </div>
-                    <span>kontakt@sichtbarmitki.agency</span>
+                    <span>hallo@sichtbarmitki.agency</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-blue-400 shrink-0">
+                      <Phone className="w-4 h-4" />
+                    </div>
+                    <span>+49 1590 6122744</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-blue-400 shrink-0">
