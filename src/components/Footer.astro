@@ -41,6 +41,15 @@
           <li><a href="/impressum" class="hover:text-blue-400 transition-colors">Impressum</a></li>
           <li><a href="/datenschutz" class="hover:text-blue-400 transition-colors">Datenschutzrichtlinie</a></li>
           <li><a href="/agb" class="hover:text-blue-400 transition-colors">Allgemeine Geschäftsbedingungen</a></li>
+          <li>
+            <button
+              type="button"
+              onclick="localStorage.removeItem('sichtbarmitki_cookie_consent'); window.location.reload();"
+              class="hover:text-blue-400 transition-colors text-left cursor-pointer"
+            >
+              Cookie-Einstellungen
+            </button>
+          </li>
         </ul>
       </div>
 

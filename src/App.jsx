@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CookieBanner from './components/CookieBanner.jsx';
 import {
   Sparkles,
   LineChart,
@@ -25,6 +26,7 @@ import {
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cookieBannerManualOpen, setCookieBannerManualOpen] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -724,7 +726,13 @@ export default function App() {
             </div>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-6">
+            <button
+              onClick={() => setCookieBannerManualOpen(true)}
+              className="hover:text-slate-300 transition-colors underline underline-offset-4 cursor-pointer text-xs"
+            >
+              Cookie-Einstellungen
+            </button>
             <a href="/impressum" className="hover:text-slate-300 transition-colors underline underline-offset-4">
               Impressum
             </a>
@@ -734,6 +742,12 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Cookie Banner with Google Consent Mode v2 */}
+      <CookieBanner
+        isOpenManually={cookieBannerManualOpen}
+        onCloseManual={() => setCookieBannerManualOpen(false)}
+      />
     </div>
   );
 }

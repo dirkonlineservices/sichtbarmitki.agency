@@ -6,8 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="DS Online Services - SichtbarmitKI.agency: Maximale Sichtbarkeit in generativen KI-Suchmaschinen (GEO), smarte Web-Analytics und KI-Implementierung." />
     <title>DS Online Services - SichtbarmitKI.agency | Generative Engine Optimization (GEO)</title>
+
+    <!-- Google Consent Mode v2 (Default Configuration) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+
+      (function() {
+        var stored = null;
+        try {
+          stored = JSON.parse(localStorage.getItem('sichtbarmitki_cookie_consent'));
+        } catch (e) {}
+
+        if (stored) {
+          gtag('consent', 'default', {
+            'analytics_storage': stored.analytics ? 'granted' : 'denied',
+            'ad_storage': stored.marketing ? 'granted' : 'denied',
+            'ad_user_data': stored.marketing ? 'granted' : 'denied',
+            'ad_personalization': stored.marketing ? 'granted' : 'denied',
+            'personalization_storage': stored.marketing ? 'granted' : 'denied',
+            'functionality_storage': 'granted',
+            'security_storage': 'granted'
+          });
+        } else {
+          gtag('consent', 'default', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'personalization_storage': 'denied',
+            'functionality_storage': 'granted',
+            'security_storage': 'granted'
+          });
+        }
+      })();
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WRLQVDM8');</script>
+    <!-- End Google Tag Manager -->
   </head>
   <body class="bg-slate-950 text-slate-100 min-h-screen antialiased selection:bg-blue-500/30 selection:text-blue-200">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WRLQVDM8"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
