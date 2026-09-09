@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   Sparkles,
-  Bot,
   LineChart,
   Workflow,
   ShieldCheck,
@@ -20,12 +19,12 @@ import {
   Smartphone,
   Music,
   Globe,
-  Radio,
-  Layers,
-  Star
+  Menu,
+  X
 } from 'lucide-react';
 
 export default function App() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -157,18 +156,22 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-blue-600/30 selection:text-blue-200">
       {/* Header / Navigation */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-slate-950/80 border-b border-slate-800/80 transition-all">
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-slate-950/85 border-b border-slate-800/80 transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
-              <Bot className="w-5 h-5" />
+          <a href="#" className="flex items-center gap-3.5 group">
+            <div className="w-11 h-11 relative rounded-full overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-300 ring-2 ring-blue-500/40 shadow-lg shadow-blue-500/25 bg-slate-900 shrink-0">
+              <img
+                src="/sichtbar-icon.png"
+                alt="Sichtbar mit KI Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
-            <div>
-              <span className="font-extrabold text-lg text-white tracking-tight block">
-                DS Online Services
+            <div className="flex flex-col">
+              <span className="font-extrabold text-lg text-white tracking-tight leading-tight group-hover:text-blue-400 transition-colors">
+                SichtbarMitKI<span className="text-blue-500">.agency</span>
               </span>
-              <span className="text-xs font-semibold text-blue-400 tracking-wider uppercase block">
-                SichtbarmitKI.agency
+              <span className="text-xs font-semibold text-slate-400 tracking-wider uppercase">
+                DS Online Services
               </span>
             </div>
           </a>
@@ -180,14 +183,68 @@ export default function App() {
             <a href="#kontakt" className="hover:text-white transition-colors">Kontakt</a>
           </nav>
 
-          <a
-            href="#kontakt"
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 transition-all shadow-md shadow-blue-500/20 active:scale-95"
+          <div className="hidden sm:flex items-center gap-4">
+            <a
+              href="#kontakt"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 transition-all shadow-md shadow-blue-500/20 active:scale-95"
+            >
+              <span>Erstgespräch vereinbaren</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-850 border border-slate-800"
+            aria-label="Menü umschalten"
           >
-            <span>Erstgespräch vereinbaren</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Dropdown */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-b border-slate-800 bg-slate-950/95 px-4 pt-3 pb-6 space-y-3">
+            <a
+              href="#services"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-white text-base font-medium"
+            >
+              Leistungen
+            </a>
+            <a
+              href="#referenzen"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-white text-base font-medium"
+            >
+              Referenzen
+            </a>
+            <a
+              href="#vorteile"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-white text-base font-medium"
+            >
+              Vorteile
+            </a>
+            <a
+              href="#kontakt"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-white text-base font-medium"
+            >
+              Kontakt
+            </a>
+            <div className="pt-2">
+              <a
+                href="#kontakt"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full text-center block px-5 py-3 text-base font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-xl shadow-md shadow-blue-500/20"
+              >
+                Erstgespräch vereinbaren
+              </a>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* 1. Hero Section */}
@@ -324,7 +381,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Referenzen-Bereich (NEU) */}
+      {/* Referenzen-Bereich */}
       <section id="referenzen" className="py-24 relative overflow-hidden bg-slate-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -454,7 +511,7 @@ export default function App() {
             })}
           </div>
 
-          {/* Statement Box */}
+          {/* Statement Box mit Dirk Schmetzer Profil */}
           <div className="mt-16 bg-gradient-to-r from-blue-950/40 via-indigo-950/30 to-slate-900 border border-blue-500/30 rounded-3xl p-8 sm:p-10 shadow-xl">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div>
@@ -474,6 +531,29 @@ export default function App() {
               >
                 Strategie besprechen
               </a>
+            </div>
+
+            <div className="mt-8 pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3.5">
+                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500/40 shadow-md shrink-0">
+                  <img
+                    src="/dirk-schmetzer-0.jpg"
+                    alt="Dirk Schmetzer"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-white">Dirk Schmetzer</p>
+                  <p className="text-xs text-slate-400">DS Online Services & SichtbarMitKI.agency, Stuttgart</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <img
+                  src="/sichtbar-full-logo.png"
+                  alt="SichtbarMitKI Logo"
+                  className="h-7 object-contain opacity-80"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -627,12 +707,21 @@ export default function App() {
       {/* 5. Minimaler Footer mit Impressum- und Datenschutz-Link */}
       <footer className="py-12 border-t border-slate-900 bg-slate-950 text-slate-500 text-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <span className="font-bold text-slate-300">DS Online Services</span>
-            <span>•</span>
-            <span>SichtbarmitKI.agency</span>
-            <span>•</span>
-            <span>© {new Date().getFullYear()} Dirk Schmetzer. Alle Rechte vorbehalten.</span>
+          <div className="flex items-center gap-3.5">
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-750 shrink-0">
+              <img
+                src="/sichtbar-icon.png"
+                alt="Sichtbar mit KI Logo"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <span className="font-bold text-slate-300">DS Online Services</span>
+              <span className="mx-2 text-slate-600">•</span>
+              <span className="text-slate-400">SichtbarmitKI.agency</span>
+              <span className="mx-2 text-slate-600">•</span>
+              <span>© {new Date().getFullYear()} Dirk Schmetzer. Alle Rechte vorbehalten.</span>
+            </div>
           </div>
 
           <div className="flex items-center gap-6">
