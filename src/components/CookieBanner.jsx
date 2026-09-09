@@ -57,12 +57,9 @@ export default function CookieBanner({ isOpenManually, onCloseManual }) {
         const parsed = JSON.parse(stored);
         setConsent(parsed);
         updateGtagConsent(parsed);
-      } catch (e) {
-        setIsVisible(true);
-      }
-    } else {
-      setIsVisible(true);
+      } catch (e) {}
     }
+    // Note: Auto-popup disabled for now as requested by user ("Den Consent Banner machen wir später")
   }, []);
 
   // When triggered via Footer button

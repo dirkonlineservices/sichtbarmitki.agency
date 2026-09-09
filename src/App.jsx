@@ -21,7 +21,12 @@ import {
   Music,
   Globe,
   Menu,
-  X
+  X,
+  Award,
+  Briefcase,
+  Layers,
+  Code2,
+  Target
 } from 'lucide-react';
 
 export default function App() {
@@ -53,42 +58,39 @@ export default function App() {
       badge: "GEO & AI Search",
       title: "GEO / KI-Sichtbarkeit",
       description:
-        "Werden Sie die Nummer 1 Antwort in ChatGPT, Perplexity, Gemini & Co. Wir optimieren Ihre Marke und Inhalte gezielt für generative KI-Suchmaschinen.",
+        "Werden Sie die Nummer 1 Antwort in ChatGPT, Perplexity, Gemini & Google AI Overviews. Wir optimieren Ihre Marke und Inhalte gezielt für generative KI-Suchmaschinen.",
       points: [
         "LLM-spezifische Content-Strukturierung & Schema-Markup",
-        "Präsenz & Zitation in AI-Knowledge-Bases",
-        "Monitoring von KI-Suchantworten & Marken-Erwähnungen"
+        "Präsenz & Zitation in AI-Knowledge-Bases & Large Language Models",
+        "Kontinuierliches Monitoring von KI-Suchantworten & Markenerwähnungen"
       ],
-      gradient: "from-blue-500/10 to-indigo-500/10",
-      borderGlow: "group-hover:border-blue-500/50"
+      glow: "hover:border-blue-500/60 hover:shadow-blue-500/10"
     },
     {
       icon: LineChart,
       badge: "Data & Privacy",
       title: "Tracking & Smarte Analytics",
       description:
-        "Schluss mit Daten-Blindflug: Wir implementieren 100% DSGVO-konforme Tracking-Systeme und automatisierte Dashboards mit KI-Erkenntnissen.",
+        "Schluss mit Daten-Blindflug: Wir implementieren 100% DSGVO-konforme Tracking-Systeme und automatisierte Dashboards mit KI-gestützten Auswertungen.",
       points: [
         "Google Consent Mode v2 & Server-Side Tagging",
-        "KI-gestützte Auswertung von User-Journeys & Funnels",
+        "KI-gestützte Auswertung von User-Journeys & Conversion-Funnels",
         "Echtzeit-Dashboards ohne undurchsichtiges Datenchaos"
       ],
-      gradient: "from-indigo-500/10 to-purple-500/10",
-      borderGlow: "group-hover:border-indigo-500/50"
+      glow: "hover:border-indigo-500/60 hover:shadow-indigo-500/10"
     },
     {
       icon: Workflow,
       badge: "Automation",
       title: "KI-Workflows & Implementierung",
       description:
-        "Maßgeschneiderte KI-Automatisierungen, die repetitive Arbeit eliminieren, Anfragen qualifizieren und Teams spürbar entlasten.",
+        "Maßgeschneiderte KI-Automatisierungen, die repetitive Arbeit eliminieren, eingehende Anfragen qualifizieren und Teams spürbar entlasten.",
       points: [
-        "Automatisierte Lead-Qualifizierung & Chat-Assistenten",
-        "Verbindung bestehender Tools mit modernen Sprachmodellen",
-        "Praxisnahe Umsetzung ohne teure Abo-Fallen"
+        "Automatisierte Lead-Qualifizierung & smarte Chat-Assistenten",
+        "Verbindung bestehender Business-Tools mit modernen Sprachmodellen",
+        "Praxisnahe Umsetzung ohne teure Drittanbieter-Abo-Fallen"
       ],
-      gradient: "from-cyan-500/10 to-blue-500/10",
-      borderGlow: "group-hover:border-cyan-500/50"
+      glow: "hover:border-cyan-500/60 hover:shadow-cyan-500/10"
     }
   ];
 
@@ -106,11 +108,10 @@ export default function App() {
         "Vollständige Konzeption und technische Realisierung als native Android-App sowie performante Web-Plattform für geführte Meditationen und Achtsamkeits-Sessions.",
       highlights: [
         "Eigene native Android-App & PWA für unterbrechungsfreies Audio-Streaming",
-        "Maßgeschneiderter HTML5-Audio-Player mit Offline-Funktionalität",
+        "Maßgeschneiderter HTML5-Audio-Player mit stabiler Wiedergabe",
         "Direkte Cloud-Datenbankanbindung ohne Drittanbieter-Abo-Kosten (kein n8n)",
         "100% DSGVO-konform mit Google Consent Mode v2"
-      ],
-      tag: "Live-Projekt"
+      ]
     },
     {
       title: "MyMusicMoment24",
@@ -121,14 +122,44 @@ export default function App() {
       badgeColor: "bg-purple-500/15 text-purple-400 border-purple-500/30",
       icon: Music,
       description:
-        "Moderne, conversion-optimierte Web-Präsenz und Buchungsplattform für maßgeschneiderte Musikmomente, Event-Begleitung und personalisierte Kompositionen.",
+        "Moderne, conversion-optimierte Web-Präsenz und Buchungsplattform für maßgeschneiderte Musikmomente, Event-Begleitung und personalisierte KI-Kompositionen.",
       highlights: [
         "Blitzschnelle Ladezeiten (Lighthouse Score 95+) für minimale Absprungraten",
         "GEO-optimierte Inhaltsstruktur für Auffindbarkeit in ChatGPT, Gemini & Google",
         "Reibungslose mobile User Experience & zielgerichtete Lead-Formulare",
         "DSGVO-konformes Analytics-Setup zur messbaren Buchungsoptimierung"
-      ],
-      tag: "Live-Projekt"
+      ]
+    }
+  ];
+
+  const milestones = [
+    {
+      role: "Senior Manager New Business & Cooperation",
+      company: "hurra.com™ (Hurra Communications GmbH)",
+      focus: "Performance Marketing & Strategic Partnerships",
+      description:
+        "Jahrelange Erfahrung im performance-getriebenen Agenturumfeld. Entwicklung und Skalierung von Kooperationen, datengetriebenen Kampagnen und strategischem Neugeschäft für nationale und internationale Marken."
+    },
+    {
+      role: "Gründer & AI Music Creator",
+      company: "MyMusicMoment24 (mymusicmoment24.de)",
+      focus: "Generative KI & Creative Audio Engineering",
+      description:
+        "Pionierarbeit im Bereich generativer KI-Musikmodelle: Aufbau einer spezialisierten Plattform für personalisierte Songs, KI-Songwriting und digitale Medienproduktion."
+    },
+    {
+      role: "Full-Stack Konzeption & Entwicklung",
+      company: "Flow der Stille (flow-der-stille.de)",
+      focus: "Native Android-App & Web-Architektur",
+      description:
+        "Ganzheitliche Realisierung einer Plattform für Meditation und Entspannung – vom eigenen HTML5-Player über native Android-App bis zum datenschutzkonformen Backend ohne Drittanbieter-Abos."
+    },
+    {
+      role: "Inhaber & Digital Stratege",
+      company: "DS Online Services & SichtbarMitKI.agency",
+      focus: "GEO, Smarte Analytics & KI-Workflows für KMU",
+      description:
+        "Unternehmen gezielt in generativen KI-Suchmaschinen platzieren, rechtssichere Tracking-Infrastrukturen aufbauen und Prozesse durch intelligente KI-Automatisierung entlasten."
     }
   ];
 
@@ -136,29 +167,36 @@ export default function App() {
     {
       icon: ShieldCheck,
       title: "100% DSGVO- & Rechtssicher",
-      desc: "Keine Abmahnrisiken: Wir setzen auf saubere Consent-Konzepte und europäische Datenschutzstandards."
+      desc: "Keine Abmahnrisiken: Wir setzen auf saubere Consent-Konzepte, Server-Side Tracking und europäische Datenschutzstandards."
     },
     {
       icon: TrendingUp,
       title: "Messbare KI-Rankings",
-      desc: "Transparente Kennzahlen statt leerer Agentur-Versprechen: Sehen Sie genau, wo KI-Modelle Ihr Unternehmen empfehlen."
+      desc: "Transparente Kennzahlen statt leerer Buzzwords: Sehen Sie genau, wann und wie KI-Modelle Ihr Unternehmen empfehlen."
     },
     {
       icon: Clock,
       title: "Schnelle Umsetzung ohne Overhead",
-      desc: "Agile, direkte Zusammenarbeit ohne monatelange Konzeptionsschleifen und ohne Agentur-Mondpreise."
+      desc: "Direkte Zusammenarbeit auf Augenhöhe ohne monatelange Konzeptionsschleifen und ohne Agentur-Mondpreise."
     },
     {
       icon: Sparkles,
       title: "Zukunftssichere Technologie",
-      desc: "Modernste Web-Standards, performanter Code und direkte Anbindung an die führenden KI-Ökosysteme."
+      desc: "Moderne Web-Standards, performanter nativer Code und direkte Anbindung an die führenden generativen KI-Systeme."
     }
   ];
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-blue-600/30 selection:text-blue-200">
+      {/* Ambient background glow layers */}
+      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-b from-blue-600/15 via-indigo-600/10 to-transparent rounded-full blur-[140px]" />
+        <div className="absolute top-[35%] right-[-10%] w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-[160px]" />
+        <div className="absolute bottom-[20%] left-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[160px]" />
+      </div>
+
       {/* Header / Navigation */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-slate-950/85 border-b border-slate-800/80 transition-all">
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/80 transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <a href="#" className="flex items-center gap-3.5 group">
             <div className="w-11 h-11 relative rounded-full overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-300 ring-2 ring-blue-500/40 shadow-lg shadow-blue-500/25 bg-slate-900 shrink-0">
@@ -172,15 +210,16 @@ export default function App() {
               <span className="font-extrabold text-lg text-white tracking-tight leading-tight group-hover:text-blue-400 transition-colors">
                 SichtbarMitKI<span className="text-blue-500">.agency</span>
               </span>
-              <span className="text-xs font-semibold text-slate-400 tracking-wider uppercase">
+              <span className="text-[11px] font-semibold text-slate-400 tracking-wider uppercase">
                 DS Online Services
               </span>
             </div>
           </a>
 
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+          <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
             <a href="#services" className="hover:text-white transition-colors">Leistungen</a>
             <a href="#referenzen" className="hover:text-white transition-colors">Referenzen</a>
+            <a href="#ueber-mich" className="hover:text-white transition-colors">Über Dirk</a>
             <a href="#vorteile" className="hover:text-white transition-colors">Vorteile</a>
             <a href="#kontakt" className="hover:text-white transition-colors">Kontakt</a>
           </nav>
@@ -188,7 +227,7 @@ export default function App() {
           <div className="hidden sm:flex items-center gap-4">
             <a
               href="#kontakt"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 transition-all shadow-md shadow-blue-500/20 active:scale-95"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 transition-all shadow-md shadow-blue-500/20 active:scale-95"
             >
               <span>Erstgespräch vereinbaren</span>
               <ArrowRight className="w-4 h-4" />
@@ -198,7 +237,7 @@ export default function App() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-850 border border-slate-800"
+            className="md:hidden p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 border border-slate-800"
             aria-label="Menü umschalten"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -221,6 +260,13 @@ export default function App() {
               className="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-white text-base font-medium"
             >
               Referenzen
+            </a>
+            <a
+              href="#ueber-mich"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-white text-base font-medium"
+            >
+              Über Dirk Schmetzer
             </a>
             <a
               href="#vorteile"
@@ -251,28 +297,24 @@ export default function App() {
 
       {/* 1. Hero Section */}
       <section className="relative pt-20 pb-24 md:pt-28 md:pb-36 overflow-hidden">
-        {/* Background Glowing Gradients */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-tr from-blue-600/20 via-indigo-600/15 to-purple-600/10 rounded-full blur-3xl pointer-events-none -z-10" />
-        <div className="absolute top-12 right-12 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             {/* Top Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-8 backdrop-blur-sm shadow-sm animate-fade-in">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-cyan-500/10 text-blue-300 border border-blue-500/30 mb-8 backdrop-blur-sm shadow-sm">
               <Sparkles className="w-3.5 h-3.5 text-blue-400 animate-pulse" />
-              <span>Generative Engine Optimization (GEO) & KI-Implementierung</span>
+              <span>Generative Engine Optimization (GEO) • Smarte Analytics • KI-Workflows</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.12]">
               Werden Sie sichtbar in{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-200 to-cyan-400">
                 generativen KI-Suchmaschinen
               </span>
             </h1>
 
             {/* Value Proposition */}
-            <p className="mt-6 sm:mt-8 text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-6 sm:mt-8 text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
               Kunden suchen heute mit ChatGPT, Perplexity und Google AI Overviews.
               Wir machen Ihr Unternehmen dort zur verlässlichen Top-Empfehlung –
               ergänzt durch rechtssichere Web-Analytics und smarte KI-Workflows.
@@ -282,7 +324,7 @@ export default function App() {
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="#kontakt"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl shadow-lg shadow-blue-500/25 hover:from-blue-500 hover:to-indigo-500 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 rounded-xl shadow-lg shadow-blue-500/25 hover:from-blue-500 hover:to-indigo-500 hover:scale-[1.02] active:scale-[0.98] transition-all"
               >
                 <span>Kostenloses Erstgespräch</span>
                 <ArrowRight className="w-4 h-4" />
@@ -340,14 +382,14 @@ export default function App() {
               return (
                 <div
                   key={index}
-                  className={`group relative bg-slate-900/80 border border-slate-800 rounded-2xl p-8 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 flex flex-col justify-between ${service.borderGlow}`}
+                  className={`group relative bg-slate-900/70 border border-slate-800 rounded-3xl p-8 transition-all duration-300 flex flex-col justify-between hover:bg-slate-900/90 ${service.glow}`}
                 >
                   <div>
                     <div className="flex items-center justify-between mb-6">
-                      <div className="w-14 h-14 rounded-xl bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-600/20 via-indigo-600/15 to-cyan-500/20 border border-blue-500/30 text-blue-400 flex items-center justify-center group-hover:scale-105 transition-all shadow-md">
                         <Icon className="w-7 h-7" />
                       </div>
-                      <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-800 text-slate-400 border border-slate-700">
+                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
                         {service.badge}
                       </span>
                     </div>
@@ -478,8 +520,108 @@ export default function App() {
         </div>
       </section>
 
-      {/* 3. Vertrauensbereich / Vorteile */}
-      <section id="vorteile" className="py-24 bg-slate-900/30 border-t border-slate-800/80 relative overflow-hidden">
+      {/* 3. Vita / Über Dirk Schmetzer (NEU) */}
+      <section id="ueber-mich" className="py-24 relative overflow-hidden bg-slate-900/30 border-t border-slate-800/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-bold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3.5 py-1 rounded-full">
+              Hinter den Kulissen
+            </span>
+            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+              Über Dirk Schmetzer
+            </h2>
+            <p className="mt-4 text-slate-400 text-base sm:text-lg">
+              Strategisches Business Development trifft auf praxisnahe KI-Implementierung und handfesten Code.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            {/* Left Col: Photo & Bio Card */}
+            <div className="lg:col-span-5 bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 border border-slate-800 rounded-3xl p-8 shadow-2xl relative">
+              <div className="relative mb-6">
+                <div className="w-36 h-36 mx-auto rounded-3xl overflow-hidden border-2 border-blue-500/40 shadow-2xl shadow-blue-500/20 relative group">
+                  <img
+                    src="/dirk-schmetzer-0.jpg"
+                    alt="Dirk Schmetzer"
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-blue-600/90 backdrop-blur-md border border-blue-400/30 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-0.5 rounded-full whitespace-nowrap shadow-md">
+                  Gründer & Stratege
+                </div>
+              </div>
+
+              <div className="text-center mt-6">
+                <h3 className="text-2xl font-extrabold text-white">Dirk Schmetzer</h3>
+                <p className="text-xs font-medium text-blue-400 mt-1">
+                  Senior Manager New Business & Kooperationen • KI-Implementierer
+                </p>
+                <p className="text-xs text-slate-400 mt-0.5">DS Online Services, Stuttgart</p>
+              </div>
+
+              <div className="mt-6 pt-6 border-t border-slate-800/80 space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                <p>
+                  „Ich verbinde über 15 Jahre Erfahrung im performance-orientierten Agenturgeschäft mit modernster generativer KI und agiler Software-Entwicklung.“
+                </p>
+                <p>
+                  Mein Fokus liegt darauf, mittelständischen Unternehmen echten, messbaren Vorsprung zu verschaffen – durch Top-Platzierungen in KI-Suchmaschinen (GEO), intelligente Prozessautomation und saubere Daten ohne teure Agentur-Mondpreise.
+                </p>
+              </div>
+
+              {/* LinkedIn CTA */}
+              <div className="mt-8 pt-6 border-t border-slate-800/80">
+                <a
+                  href="https://www.linkedin.com/in/dirkschmetzer/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2.5 py-3 px-5 rounded-xl font-bold text-sm text-white bg-[#0A66C2] hover:bg-[#004182] transition-all shadow-md shadow-[#0A66C2]/20 hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.69c-.93 0-1.68.75-1.68 1.68s.75 1.68 1.68 1.68 1.68-.75 1.68-1.68-.75-1.68-1.68-1.68Z" />
+                  </svg>
+                  <span>Auf LinkedIn vernetzen</span>
+                  <ExternalLink className="w-3.5 h-3.5 ml-0.5 opacity-80" />
+                </a>
+              </div>
+            </div>
+
+            {/* Right Col: Timeline & Experience Stations */}
+            <div className="lg:col-span-7 space-y-5">
+              <div className="mb-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  Erfahrung & Werdegang
+                </span>
+                <h3 className="text-2xl font-bold text-white mt-1">
+                  Kompetenzen aus der Praxis, nicht aus dem Lehrbuch
+                </h3>
+              </div>
+
+              <div className="space-y-4">
+                {milestones.map((m, idx) => (
+                  <div
+                    key={idx}
+                    className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-slate-700 transition-all hover:bg-slate-900/80"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                      <h4 className="text-base font-bold text-white">{m.role}</h4>
+                      <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                        {m.focus}
+                      </span>
+                    </div>
+                    <p className="text-xs font-semibold text-slate-400 mb-2">{m.company}</p>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                      {m.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Vertrauensbereich / Vorteile */}
+      <section id="vorteile" className="py-24 bg-slate-950 border-t border-slate-800/80 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-bold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3.5 py-1 rounded-full">
@@ -513,7 +655,7 @@ export default function App() {
             })}
           </div>
 
-          {/* Statement Box mit Dirk Schmetzer Profil */}
+          {/* Statement Box */}
           <div className="mt-16 bg-gradient-to-r from-blue-950/40 via-indigo-950/30 to-slate-900 border border-blue-500/30 rounded-3xl p-8 sm:p-10 shadow-xl">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div>
@@ -561,7 +703,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 4. Kontakt-Sektion / CTA am Ende */}
+      {/* 5. Kontakt-Sektion / CTA am Ende */}
       <section id="kontakt" className="py-24 bg-slate-900/50 border-t border-slate-800/80 relative">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
@@ -706,7 +848,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 5. Minimaler Footer mit Impressum- und Datenschutz-Link */}
+      {/* 6. Minimaler Footer mit Impressum- und Datenschutz-Link */}
       <footer className="py-12 border-t border-slate-900 bg-slate-950 text-slate-500 text-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3.5">
@@ -743,7 +885,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Cookie Banner with Google Consent Mode v2 */}
+      {/* Cookie Banner with Google Consent Mode v2 (Auto-display deactivated, accessible via footer) */}
       <CookieBanner
         isOpenManually={cookieBannerManualOpen}
         onCloseManual={() => setCookieBannerManualOpen(false)}
