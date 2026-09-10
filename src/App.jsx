@@ -22,27 +22,84 @@ import {
   Globe,
   Menu,
   X,
-  Award,
-  Briefcase,
-  Layers,
-  Code2,
-  Target
+  ShoppingBag,
+  Compass,
+  MessageCircle,
+  Loader2
 } from 'lucide-react';
+
+function WhatsAppIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.41a8.21 8.21 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.25-1.49-1.4-1.74-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.02 2.61c.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.29z"/>
+    </svg>
+  );
+}
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cookieBannerManualOpen, setCookieBannerManualOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     company: '',
+    phone: '',
     message: ''
   });
 
-  const handleSubmit = (e) => {
+  const whatsappNumber = "4915906122744";
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    "Hallo Dirk, ich interessiere mich für ein strategisches Erstgespräch zu GEO, KI-Sichtbarkeit und E-Commerce Beratung."
+  )}`;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    setIsSubmitting(true);
+
+    try {
+      // Send directly to primary email with CC to gmail
+      const response = await fetch('https://formsubmit.co/ajax/hallo@sichtbarmitki.agency', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          Name: formData.name,
+          Email: formData.email,
+          Telefon: formData.phone || 'Nicht angegeben',
+          Unternehmen: formData.company || 'Nicht angegeben',
+          Nachricht: formData.message || 'Keine Nachricht angegeben',
+          _cc: 'dirk.online.services@gmail.com',
+          _subject: `Neue Kontaktanfrage von ${formData.name} (sichtbarmitki.agency)`,
+          _template: 'table',
+          _captcha: 'false'
+        })
+      });
+
+      if (response.ok) {
+        setFormSubmitted(true);
+      } else {
+        // Mailto fallback
+        window.location.href = `mailto:hallo@sichtbarmitki.agency?cc=dirk.online.services@gmail.com&subject=${encodeURIComponent(
+          `Neue Anfrage von ${formData.name}`
+        )}&body=${encodeURIComponent(
+          `Name: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.phone}\nUnternehmen: ${formData.company}\n\nNachricht:\n${formData.message}`
+        )}`;
+        setFormSubmitted(true);
+      }
+    } catch (err) {
+      window.location.href = `mailto:hallo@sichtbarmitki.agency?cc=dirk.online.services@gmail.com&subject=${encodeURIComponent(
+        `Neue Anfrage von ${formData.name}`
+      )}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.phone}\nUnternehmen: ${formData.company}\n\nNachricht:\n${formData.message}`
+      )}`;
+      setFormSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -52,43 +109,57 @@ export default function App() {
     });
   };
 
+  // 4 Focused Strategic Services
   const services = [
     {
       icon: SearchCheck,
-      badge: "GEO & AI Search",
-      title: "GEO / KI-Sichtbarkeit",
+      badge: "Generative Engine Optimization",
+      title: "GEO / KI-Suchmaschinen-Sichtbarkeit",
       description:
-        "Werden Sie die Nummer 1 Antwort in ChatGPT, Perplexity, Gemini & Google AI Overviews. Wir optimieren Ihre Marke und Inhalte gezielt für generative KI-Suchmaschinen.",
+        "Werden Sie die verlässliche Empfehlung in ChatGPT, Perplexity, Google AI Overviews & Gemini. Wir positionieren Ihre Marke und Inhalte gezielt als autoritative Quelle in Large Language Models.",
       points: [
-        "LLM-spezifische Content-Strukturierung & Schema-Markup",
-        "Präsenz & Zitation in AI-Knowledge-Bases & Large Language Models",
-        "Kontinuierliches Monitoring von KI-Suchantworten & Markenerwähnungen"
+        "LLM-spezifische Content-Strukturierung & semantisches Schema-Markup",
+        "Präsenz, Zitation & Nennung in KI-Wissensdatenbanken & Sprachmodellen",
+        "Kontinuierliches Monitoring von generativen KI-Suchantworten & Marken-Rankings"
       ],
       glow: "hover:border-blue-500/60 hover:shadow-blue-500/10"
     },
     {
-      icon: LineChart,
-      badge: "Data & Privacy",
-      title: "Tracking & Smarte Analytics",
+      icon: ShoppingBag,
+      badge: "E-Commerce & Digital Strategy",
+      title: "Strategische E-Commerce Beratung",
       description:
-        "Schluss mit Daten-Blindflug: Wir implementieren 100% DSGVO-konforme Tracking-Systeme und automatisierte Dashboards mit KI-gestützten Auswertungen.",
+        "Fundierte strategische Begleitung für Online-Shops & E-Commerce Marken: Wir analysieren Ihre Shop-Architektur, Conversion-Funnels und decken Wachstumsblockaden auf.",
       points: [
-        "Google Consent Mode v2 & Server-Side Tagging",
-        "KI-gestützte Auswertung von User-Journeys & Conversion-Funnels",
-        "Echtzeit-Dashboards ohne undurchsichtiges Datenchaos"
+        "Strategische Auswahl & Optimierung von Shop-Systemen (Shopify, WooCommerce & Co.)",
+        "Conversion-Rate-Optimierung (CRO) & Ausrichtung auf maximalen ROI",
+        "Ablösung träger Baukästen & Architektur-Konzepte ohne Agentur-Mondpreise"
+      ],
+      glow: "hover:border-purple-500/60 hover:shadow-purple-500/10"
+    },
+    {
+      icon: LineChart,
+      badge: "Data, Privacy & Tracking",
+      title: "Smarte Web-Analytics & DSGVO-Tracking",
+      description:
+        "Schluss mit Daten-Blindflug: Wir implementieren 100% DSGVO-konforme Tracking-Infrastrukturen und automatisierte Dashboards für glasklare, unternehmerische Entscheidungen.",
+      points: [
+        "Google Consent Mode v2 & Server-Side Tagging für verlässliche Daten",
+        "KI-gestützte Auswertung von User-Journeys & Conversion-Abbrüchen",
+        "Transparente Echtzeit-Dashboards statt unübersichtlicher Datenberge"
       ],
       glow: "hover:border-indigo-500/60 hover:shadow-indigo-500/10"
     },
     {
       icon: Workflow,
-      badge: "Automation",
-      title: "KI-Workflows & Implementierung",
+      badge: "KI-Workflows & Prozess-Strategie",
+      title: "KI-Workflows & Prozess-Strategie",
       description:
-        "Maßgeschneiderte KI-Automatisierungen, die repetitive Arbeit eliminieren, eingehende Anfragen qualifizieren und Teams spürbar entlasten.",
+        "Wo lohnt sich KI in Ihrem Unternehmen wirklich? Wir identifizieren lukrative Automatisierungs-Hebel, die manuelle Routinearbeit eliminieren und Kosten nachhaltig senken.",
       points: [
-        "Automatisierte Lead-Qualifizierung & smarte Chat-Assistenten",
-        "Verbindung bestehender Business-Tools mit modernen Sprachmodellen",
-        "Praxisnahe Umsetzung ohne teure Drittanbieter-Abo-Fallen"
+        "Strategische Vorqualifizierung von Kundenanfragen & intelligente Chat-Assistenten",
+        "Nahtlose Integration moderner Sprachmodelle in bestehende Betriebsabläufe",
+        "Praxisnahe Umsetzung mit klarem Fokus auf betriebswirtschaftlichen Nutzen"
       ],
       glow: "hover:border-cyan-500/60 hover:shadow-cyan-500/10"
     }
@@ -138,7 +209,14 @@ export default function App() {
       company: "hurra.com™ (Hurra Communications GmbH)",
       focus: "Performance Marketing & Strategic Partnerships",
       description:
-        "Jahrelange Erfahrung im performance-getriebenen Agenturumfeld. Entwicklung und Skalierung von Kooperationen, datengetriebenen Kampagnen und strategischem Neugeschäft für nationale und internationale Marken."
+        "Jahrelange Erfahrung im performance-getriebenen Agenturumfeld. Entwicklung und Skalierung von Partnerschaften, datengetriebenen Kampagnen und strategischem Neugeschäft für nationale und internationale Marken."
+    },
+    {
+      role: "Strategischer E-Commerce & KI-Berater",
+      company: "DS Online Services & SichtbarMitKI.agency",
+      focus: "GEO, E-Commerce Architektur & Smarte Analytics",
+      description:
+        "Ganzheitliches Sparring für Unternehmer: Von der Positionierung in generativen KI-Suchmaschinen (GEO) über Shop-Architektur bis zu DSGVO-konformen Tracking-Systemen. Fokus auf Strategie und ROI."
     },
     {
       role: "Gründer & AI Music Creator",
@@ -153,36 +231,29 @@ export default function App() {
       focus: "Native Android-App & Web-Architektur",
       description:
         "Ganzheitliche Realisierung einer Plattform für Meditation und Entspannung – vom eigenen HTML5-Player über native Android-App bis zum datenschutzkonformen Backend ohne Drittanbieter-Abos."
-    },
-    {
-      role: "Inhaber & Digital Stratege",
-      company: "DS Online Services & SichtbarMitKI.agency",
-      focus: "GEO, Smarte Analytics & KI-Workflows für KMU",
-      description:
-        "Unternehmen gezielt in generativen KI-Suchmaschinen platzieren, rechtssichere Tracking-Infrastrukturen aufbauen und Prozesse durch intelligente KI-Automatisierung entlasten."
     }
   ];
 
   const benefits = [
+    {
+      icon: Compass,
+      title: "Strategischer Weitblick",
+      desc: "Kein operatives Klein-Klein: Wir betrachten Ihr gesamtes Geschäftsmodell und setzen Prioritäten dort, wo sie den größten wirtschaftlichen Hebel haben."
+    },
+    {
+      icon: TrendingUp,
+      title: "Messbare KI-Rankings (GEO)",
+      desc: "Transparente Kennzahlen statt leerer Buzzwords: Sehen Sie genau, wann und wie KI-Modelle Ihr Unternehmen aktiv empfehlen."
+    },
     {
       icon: ShieldCheck,
       title: "100% DSGVO- & Rechtssicher",
       desc: "Keine Abmahnrisiken: Wir setzen auf saubere Consent-Konzepte, Server-Side Tracking und europäische Datenschutzstandards."
     },
     {
-      icon: TrendingUp,
-      title: "Messbare KI-Rankings",
-      desc: "Transparente Kennzahlen statt leerer Buzzwords: Sehen Sie genau, wann und wie KI-Modelle Ihr Unternehmen empfehlen."
-    },
-    {
       icon: Clock,
       title: "Schnelle Umsetzung ohne Overhead",
-      desc: "Direkte Zusammenarbeit auf Augenhöhe ohne monatelange Konzeptionsschleifen und ohne Agentur-Mondpreise."
-    },
-    {
-      icon: Sparkles,
-      title: "Zukunftssichere Technologie",
-      desc: "Moderne Web-Standards, performanter nativer Code und direkte Anbindung an die führenden generativen KI-Systeme."
+      desc: "Direkte Zusammenarbeit mit Dirk Schmetzer auf Augenhöhe – ohne zeitraubende Agentur-Schleifen und ohne Mondpreise."
     }
   ];
 
@@ -195,8 +266,26 @@ export default function App() {
         <div className="absolute bottom-[20%] left-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[160px]" />
       </div>
 
+      {/* Floating WhatsApp Quick Contact Button (Bottom Right) */}
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="WhatsApp Direktkontakt"
+        className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl shadow-emerald-950/60 border border-emerald-400/40 hover:scale-105 active:scale-95 transition-all group"
+      >
+        <div className="relative">
+          <WhatsAppIcon className="w-6 h-6 fill-white" />
+          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-white rounded-full animate-ping opacity-75" />
+          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-white rounded-full" />
+        </div>
+        <span className="hidden sm:inline font-bold text-sm tracking-tight pr-1">
+          WhatsApp Chat
+        </span>
+      </a>
+
       {/* Header / Navigation */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/80 transition-all">
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/85 border-b border-slate-800/80 transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <a href="#" className="flex items-center gap-3.5 group">
             <div className="w-11 h-11 relative rounded-full overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-300 ring-2 ring-blue-500/40 shadow-lg shadow-blue-500/25 bg-slate-900 shrink-0">
@@ -216,7 +305,7 @@ export default function App() {
             </div>
           </a>
 
-          <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
+          <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-300">
             <a href="#services" className="hover:text-white transition-colors">Leistungen</a>
             <a href="#referenzen" className="hover:text-white transition-colors">Referenzen</a>
             <a href="#ueber-mich" className="hover:text-white transition-colors">Über Dirk</a>
@@ -224,7 +313,17 @@ export default function App() {
             <a href="#kontakt" className="hover:text-white transition-colors">Kontakt</a>
           </nav>
 
-          <div className="hidden sm:flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-3">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-emerald-300 bg-emerald-950/70 hover:bg-emerald-900/90 border border-emerald-500/30 transition-all shadow-sm"
+              title="Per WhatsApp schreiben"
+            >
+              <WhatsAppIcon className="w-4 h-4 text-emerald-400" />
+              <span>WhatsApp</span>
+            </a>
             <a
               href="#kontakt"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 transition-all shadow-md shadow-blue-500/20 active:scale-95"
@@ -237,7 +336,7 @@ export default function App() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 border border-slate-800"
+            className="lg:hidden p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 border border-slate-800"
             aria-label="Menü umschalten"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -246,7 +345,7 @@ export default function App() {
 
         {/* Mobile Dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-b border-slate-800 bg-slate-950/95 px-4 pt-3 pb-6 space-y-3">
+          <div className="lg:hidden border-b border-slate-800 bg-slate-950/95 px-4 pt-3 pb-6 space-y-3">
             <a
               href="#services"
               onClick={() => setMobileMenuOpen(false)}
@@ -282,7 +381,16 @@ export default function App() {
             >
               Kontakt
             </a>
-            <div className="pt-2">
+            <div className="pt-2 flex flex-col gap-2">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full text-center flex items-center justify-center gap-2 px-5 py-3 text-base font-semibold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 rounded-xl"
+              >
+                <WhatsAppIcon className="w-5 h-5 text-emerald-400" />
+                <span>Direkt per WhatsApp schreiben</span>
+              </a>
               <a
                 href="#kontakt"
                 onClick={() => setMobileMenuOpen(false)}
@@ -302,22 +410,22 @@ export default function App() {
             {/* Top Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-cyan-500/10 text-blue-300 border border-blue-500/30 mb-8 backdrop-blur-sm shadow-sm">
               <Sparkles className="w-3.5 h-3.5 text-blue-400 animate-pulse" />
-              <span>Generative Engine Optimization (GEO) • Smarte Analytics • KI-Workflows</span>
+              <span>Strategische Beratung • GEO & KI-Sichtbarkeit • E-Commerce • Analytics</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.12]">
-              Werden Sie sichtbar in{' '}
+              Sichtbarkeit & Strategie in der{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-200 to-cyan-400">
-                generativen KI-Suchmaschinen
+                Ära generativer KI
               </span>
             </h1>
 
             {/* Value Proposition */}
             <p className="mt-6 sm:mt-8 text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
-              Kunden suchen heute mit ChatGPT, Perplexity und Google AI Overviews.
-              Wir machen Ihr Unternehmen dort zur verlässlichen Top-Empfehlung –
-              ergänzt durch rechtssichere Web-Analytics und smarte KI-Workflows.
+              Entscheider und Kunden suchen heute mit ChatGPT, Perplexity und Google AI Overviews.
+              Wir machen Ihr Unternehmen und Ihren E-Commerce dort zur verlässlichen Top-Empfehlung –
+              gestützt auf fundierte Strategie, rechtssichere Web-Analytics und smarte KI-Workflows.
             </p>
 
             {/* CTAs */}
@@ -329,9 +437,20 @@ export default function App() {
                 <span>Kostenloses Erstgespräch</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
+
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 text-base font-semibold text-emerald-300 bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-500/40 rounded-xl shadow-md shadow-emerald-950/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              >
+                <WhatsAppIcon className="w-5 h-5 text-emerald-400" />
+                <span>WhatsApp Schnellkontakt</span>
+              </a>
+
               <a
                 href="#services"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold text-slate-300 bg-slate-900/80 hover:bg-slate-800 hover:text-white border border-slate-800 rounded-xl transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 text-base font-semibold text-slate-300 bg-slate-900/80 hover:bg-slate-800 hover:text-white border border-slate-800 rounded-xl transition-all"
               >
                 <span>Leistungen ansehen</span>
                 <ChevronRight className="w-4 h-4" />
@@ -346,37 +465,37 @@ export default function App() {
               </div>
               <div className="flex items-center justify-center gap-2">
                 <Check className="w-4 h-4 text-blue-400 shrink-0" />
+                <span>E-Commerce Strategie</span>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                <Check className="w-4 h-4 text-blue-400 shrink-0" />
                 <span>100% DSGVO-Konform</span>
               </div>
               <div className="flex items-center justify-center gap-2">
                 <Check className="w-4 h-4 text-blue-400 shrink-0" />
-                <span>Keine Agentur-Mondpreise</span>
-              </div>
-              <div className="flex items-center justify-center gap-2">
-                <Check className="w-4 h-4 text-blue-400 shrink-0" />
-                <span>Echte Kunden-Referenzen</span>
+                <span>Senior Beratung auf Augenhöhe</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. Leistungsübersicht */}
+      {/* 2. Leistungsübersicht (4 Säulen inklusive E-Commerce Beratung) */}
       <section id="services" className="py-24 bg-slate-900/40 border-y border-slate-800/80 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-bold uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 px-3.5 py-1 rounded-full">
-              Fokussierte Kompetenzen
+              Fokussierte Kernbereiche
             </span>
             <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-              Unsere Kernleistungen für Ihren KI-Vorsprung
+              Strategische Kompetenzen für Ihren Vorsprung
             </h2>
             <p className="mt-4 text-slate-400 text-base sm:text-lg">
-              Präzise Lösungen an der Schnittstelle von generativer KI, fundierten Datenanalysen und effizienter Prozessautomation.
+              Präzise Beratung an der Schnittstelle von generativer KI, fundierter E-Commerce-Architektur und belastbarer Datenanalyse.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
@@ -403,7 +522,7 @@ export default function App() {
 
                     <div className="space-y-3 pt-4 border-t border-slate-800/80 mb-6">
                       {service.points.map((pt, i) => (
-                        <div key={i} className="flex items-start gap-2.5 text-xs text-slate-300">
+                        <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
                           <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
                           <span>{pt}</span>
                         </div>
@@ -415,7 +534,7 @@ export default function App() {
                     href="#kontakt"
                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-400 hover:text-blue-300 group-hover:translate-x-1 transition-all pt-2"
                   >
-                    <span>Jetzt anfragen</span>
+                    <span>Strategiegespräch anfragen</span>
                     <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
@@ -520,7 +639,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 3. Vita / Über Dirk Schmetzer (NEU) */}
+      {/* 3. Vita / Über Dirk Schmetzer */}
       <section id="ueber-mich" className="py-24 relative overflow-hidden bg-slate-900/30 border-t border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -531,7 +650,7 @@ export default function App() {
               Über Dirk Schmetzer
             </h2>
             <p className="mt-4 text-slate-400 text-base sm:text-lg">
-              Strategisches Business Development trifft auf praxisnahe KI-Implementierung und handfesten Code.
+              Senior Business & E-Commerce Stratege • KI-Implementierer auf Augenhöhe
             </p>
           </div>
 
@@ -542,7 +661,7 @@ export default function App() {
                 <div className="w-36 h-36 mx-auto rounded-3xl overflow-hidden border-2 border-blue-500/40 shadow-2xl shadow-blue-500/20 relative group">
                   <img
                     src="/dirk-schmetzer.png"
-                    alt="Dirk Schmetzer"
+                    alt="Dirk Schmetzer Portrait"
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -554,22 +673,32 @@ export default function App() {
               <div className="text-center mt-6">
                 <h3 className="text-2xl font-extrabold text-white">Dirk Schmetzer</h3>
                 <p className="text-xs font-medium text-blue-400 mt-1">
-                  Senior Manager New Business & Kooperationen • KI-Implementierer
+                  Senior Manager New Business & Kooperationen • E-Commerce & KI-Stratege
                 </p>
                 <p className="text-xs text-slate-400 mt-0.5">DS Online Services, Stuttgart</p>
               </div>
 
               <div className="mt-6 pt-6 border-t border-slate-800/80 space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
                 <p>
-                  „Ich verbinde über 15 Jahre Erfahrung im performance-orientierten Agenturgeschäft mit modernster generativer KI und agiler Software-Entwicklung.“
+                  „Ich verbinde über 15 Jahre Erfahrung im performance-orientierten Marketing- und Agenturgeschäft mit modernster generativer KI, E-Commerce-Architektur und solider Software-Entwicklung.“
                 </p>
                 <p>
-                  Mein Fokus liegt darauf, mittelständischen Unternehmen echten, messbaren Vorsprung zu verschaffen – durch Top-Platzierungen in KI-Suchmaschinen (GEO), intelligente Prozessautomation und saubere Daten ohne teure Agentur-Mondpreise.
+                  <strong className="text-white">Mein Rollenverständnis:</strong> Ich verstehe mich vor allem als strategischer Sparringspartner und Architekt. Statt mich in operativem Agentur-Klein-Klein zu verlieren, erarbeite ich mit Ihnen die übergeordneten Hebel: Wie wird Ihr Angebot in KI-Suchmaschinen zur Nummer 1? Welche E-Commerce-Infrastruktur skaliert profitabel? Und wo lohnt sich Automatisierung wirklich?
                 </p>
               </div>
 
-              {/* LinkedIn CTA */}
-              <div className="mt-8 pt-6 border-t border-slate-800/80">
+              {/* Action Buttons: LinkedIn & WhatsApp */}
+              <div className="mt-8 pt-6 border-t border-slate-800/80 space-y-3">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-bold text-sm text-white bg-emerald-600 hover:bg-emerald-500 transition-all shadow-md shadow-emerald-950/40 hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  <WhatsAppIcon className="w-4 h-4 fill-white" />
+                  <span>Direkt per WhatsApp kontaktieren</span>
+                </a>
+
                 <a
                   href="https://www.linkedin.com/in/dirkschmetzer/"
                   target="_blank"
@@ -628,7 +757,7 @@ export default function App() {
               Warum DS Online Services
             </span>
             <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-              Ihr Partner für greifbare Ergebnisse
+              Ihr strategischer Partner für greifbare Ergebnisse
             </h2>
             <p className="mt-4 text-slate-400 text-base sm:text-lg">
               Kein Agentur-Fachchinesisch, keine leeren Buzzwords. Wir bauen funktionierende Systeme mit klarem Return on Investment.
@@ -705,13 +834,13 @@ export default function App() {
 
       {/* 5. Kontakt-Sektion / CTA am Ende */}
       <section id="kontakt" className="py-24 bg-slate-900/50 border-t border-slate-800/80 relative">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
             {/* Ambient Background Accent */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
-              {/* Left Column: Info */}
+              {/* Left Column: Info & Direkte Kontaktwege */}
               <div className="lg:col-span-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-blue-400">
                   Lassen Sie uns sprechen
@@ -720,107 +849,191 @@ export default function App() {
                   Kostenloses Erstgespräch anfragen
                 </h2>
                 <p className="text-sm text-slate-300 mt-4 leading-relaxed">
-                  In 30 Minuten analysieren wir Ihre aktuelle Sichtbarkeit in generativen KI-Suchmaschinen und zeigen Ihnen 3 konkrete Quick-Wins für Ihr Unternehmen.
+                  In 30 Minuten analysieren wir Ihre aktuelle Sichtbarkeit in generativen KI-Suchmaschinen, prüfen Ihr E-Commerce-Potenzial und zeigen 3 konkrete Quick-Wins für Ihr Unternehmen auf.
                 </p>
 
-                <div className="mt-8 space-y-4 text-xs sm:text-sm text-slate-300">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-blue-400 shrink-0">
-                      <Mail className="w-4 h-4" />
+                {/* Direct Contact Cards */}
+                <div className="mt-8 space-y-3.5 text-xs sm:text-sm text-slate-200">
+                  {/* WhatsApp */}
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 hover:border-emerald-500/60 hover:bg-emerald-950/70 transition-all group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                        <WhatsAppIcon className="w-5 h-5 fill-emerald-400" />
+                      </div>
+                      <div>
+                        <div className="text-[11px] font-semibold text-emerald-400 uppercase tracking-wider">
+                          WhatsApp Direktkontakt
+                        </div>
+                        <div className="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
+                          01590 6122744
+                        </div>
+                      </div>
                     </div>
-                    <span>hallo@sichtbarmitki.agency</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-blue-400 shrink-0">
-                      <Phone className="w-4 h-4" />
+                    <ArrowRight className="w-4 h-4 text-emerald-400 group-hover:translate-x-1 transition-transform" />
+                  </a>
+
+                  {/* Telefon */}
+                  <a
+                    href="tel:+4915906122744"
+                    className="flex items-center justify-between p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-blue-500/50 hover:bg-slate-950/90 transition-all group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-blue-600/15 text-blue-400 flex items-center justify-center shrink-0">
+                        <Phone className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                          Telefonische Direktdurchwahl
+                        </div>
+                        <div className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
+                          +49 1590 6122744
+                        </div>
+                      </div>
                     </div>
-                    <span>+49 1590 6122744</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-blue-400 shrink-0">
-                      <MapPin className="w-4 h-4" />
+                    <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+                  </a>
+
+                  {/* E-Mail */}
+                  <a
+                    href="mailto:hallo@sichtbarmitki.agency?cc=dirk.online.services@gmail.com"
+                    className="flex items-center justify-between p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-blue-500/50 hover:bg-slate-950/90 transition-all group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-blue-600/15 text-blue-400 flex items-center justify-center shrink-0">
+                        <Mail className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                          Offizielle E-Mail-Adresse
+                        </div>
+                        <div className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors break-all">
+                          hallo@sichtbarmitki.agency
+                        </div>
+                      </div>
                     </div>
-                    <span>Stuttgart & Remote bundesweit</span>
+                    <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+                  </a>
+
+                  {/* Standort */}
+                  <div className="flex items-center gap-3 p-3.5 rounded-xl bg-slate-950/30 border border-slate-850 text-slate-400 text-xs">
+                    <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
+                    <span>Riedgrasweg 30, 70599 Stuttgart & Remote bundesweit</span>
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-slate-800">
-                  <p className="text-xs text-slate-400 leading-relaxed">
-                    💡 Unverbindlich & ohne Verkaufsdruck. Antwort garantiert innerhalb von 24 Stunden.
-                  </p>
+                <div className="mt-6 pt-5 border-t border-slate-800 text-xs text-slate-400 leading-relaxed">
+                  💡 Antwortzeit garantiert innerhalb von 24 Stunden.
                 </div>
               </div>
 
               {/* Right Column: Form */}
-              <div className="lg:col-span-3 bg-slate-950/70 border border-slate-800/80 rounded-2xl p-6 sm:p-8">
+              <div className="lg:col-span-3 bg-slate-950/80 border border-slate-800/90 rounded-2xl p-6 sm:p-8">
                 {formSubmitted ? (
-                  <div className="text-center py-10">
+                  <div className="text-center py-12">
                     <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto mb-4">
                       <CheckCircle2 className="w-8 h-8" />
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-2">Vielen Dank für Ihre Anfrage!</h3>
-                    <p className="text-sm text-slate-300 max-w-sm mx-auto mb-6">
-                      Wir haben Ihre Nachricht erhalten und melden uns innerhalb von 24 Stunden mit Terminvorschlägen bei Ihnen.
+                    <h3 className="text-xl font-bold text-white mb-2">Vielen Dank für Ihre Nachricht!</h3>
+                    <p className="text-sm text-slate-300 max-w-md mx-auto mb-6 leading-relaxed">
+                      Ihre Anfrage wurde erfolgreich an <strong>hallo@sichtbarmitki.agency</strong> übermittelt. Dirk Schmetzer meldet sich innerhalb von 24 Stunden bei Ihnen.
                     </p>
-                    <button
-                      onClick={() => setFormSubmitted(false)}
-                      className="text-xs font-semibold text-blue-400 hover:text-blue-300 underline"
-                    >
-                      Weitere Nachricht senden
-                    </button>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                      <a
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 transition-all"
+                      >
+                        <WhatsAppIcon className="w-4 h-4 fill-white" />
+                        <span>Dringend? Per WhatsApp schreiben</span>
+                      </a>
+                      <button
+                        onClick={() => {
+                          setFormSubmitted(false);
+                          setFormData({ name: '', email: '', company: '', phone: '', message: '' });
+                        }}
+                        className="text-xs font-semibold text-slate-400 hover:text-white underline py-2"
+                      >
+                        Weitere Nachricht senden
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5" htmlFor="name">
-                        Ihr Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Max Mustermann"
-                        className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
-                      />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-300 mb-1.5" htmlFor="name">
+                          Ihr Name *
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          required
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder="Max Mustermann"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-300 mb-1.5" htmlFor="email">
+                          E-Mail-Adresse *
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          required
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="max@unternehmen.de"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                        />
+                      </div>
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5" htmlFor="email">
-                        E-Mail-Adresse *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="max@unternehmen.de"
-                        className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
-                      />
-                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-300 mb-1.5" htmlFor="phone">
+                          Telefonnummer (optional)
+                        </label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          placeholder="0151 12345678"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                        />
+                      </div>
 
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5" htmlFor="company">
-                        Unternehmen / Website (optional)
-                      </label>
-                      <input
-                        type="text"
-                        id="company"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
-                        placeholder="www.mein-unternehmen.de"
-                        className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
-                      />
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-300 mb-1.5" htmlFor="company">
+                          Unternehmen / Website (optional)
+                        </label>
+                        <input
+                          type="text"
+                          id="company"
+                          name="company"
+                          value={formData.company}
+                          onChange={handleChange}
+                          placeholder="www.mein-unternehmen.de"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                        />
+                      </div>
                     </div>
 
                     <div>
                       <label className="block text-xs font-semibold text-slate-300 mb-1.5" htmlFor="message">
-                        Ihre Nachricht / Ausgangslage
+                        Ihre Ausgangslage / Was möchten Sie erreichen?
                       </label>
                       <textarea
                         id="message"
@@ -828,18 +1041,31 @@ export default function App() {
                         rows={3}
                         value={formData.message}
                         onChange={handleChange}
-                        placeholder="Kurze Beschreibung Ihrer aktuellen Herausforderung..."
+                        placeholder="Kurze Beschreibung Ihrer Herausforderung (z. B. KI-Sichtbarkeit, E-Commerce-Beratung, Tracking)..."
                         className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all resize-none"
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="w-full py-3.5 px-6 rounded-xl font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-md shadow-blue-500/20 active:scale-[0.99] transition-all flex items-center justify-center gap-2 text-sm"
+                      disabled={isSubmitting}
+                      className="w-full py-4 px-6 rounded-xl font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 shadow-lg shadow-blue-500/25 active:scale-[0.99] transition-all flex items-center justify-center gap-2 text-sm disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
                     >
-                      <Send className="w-4 h-4" />
-                      <span>Kostenloses Erstgespräch anfragen</span>
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <span>Anfrage wird übermittelt...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4" />
+                          <span>Kostenloses Erstgespräch anfragen</span>
+                        </>
+                      )}
                     </button>
+                    <p className="text-[11px] text-center text-slate-400 mt-2">
+                      Kopie der Anfrage geht automatisch an hallo@sichtbarmitki.agency & dirk.online.services@gmail.com
+                    </p>
                   </form>
                 )}
               </div>
@@ -848,7 +1074,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 6. Minimaler Footer mit Impressum- und Datenschutz-Link */}
+      {/* 6. Minimaler Footer */}
       <footer className="py-12 border-t border-slate-900 bg-slate-950 text-slate-500 text-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3.5">
@@ -885,7 +1111,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Cookie Banner with Google Consent Mode v2 (Auto-display deactivated, accessible via footer) */}
+      {/* Cookie Banner with Google Consent Mode v2 */}
       <CookieBanner
         isOpenManually={cookieBannerManualOpen}
         onCloseManual={() => setCookieBannerManualOpen(false)}
