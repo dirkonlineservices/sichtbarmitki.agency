@@ -7,16 +7,266 @@ import '../styles/global.css';
 <html lang="de" class="scroll-smooth dark">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/sichtbar-icon.png" />
+    <link rel="apple-touch-icon" href="/sichtbar-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>DS Online Services | Digitalberatung, GEO & KI-Workflows - Dirk Schmetzer</title>
+    <meta
+      name="title"
+      content="DS Online Services | Digitalberatung, GEO & KI-Workflows - Dirk Schmetzer"
+    />
     <meta
       name="description"
-      content="DS Online Services - SichtbarmitKI.agency: Maximale Sichtbarkeit in generativen KI-Suchmaschinen (GEO), smarte Web-Analytics und KI-Implementierung. Dirk Schmetzer, Stuttgart."
+      content="Strategische Digitalberatung, Generative Engine Optimization (GEO), KI-Workflows, Prozessstrategie, Smart Web Analytics und E-Commerce Beratung von Dirk Schmetzer."
     />
+    <meta
+      name="keywords"
+      content="Digitalberatung, GEO, Generative Engine Optimization, KI-Suchmaschinen, KI-Prozesse, KI-Workflows, Prozessstrategie, Smart Web Analytics, Google Consent Mode v2, E-Commerce Beratung, Dirk Schmetzer, SichtbarMitKI, Stuttgart Digitalberater"
+    />
+    <meta name="author" content="Dirk Schmetzer" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://www.sichtbarmitki.agency/" />
-    <title>DS Online Services | Digitalberatung, GEO & KI-Workflows - Dirk Schmetzer</title>
+
+    <!-- Geo & Regional Meta Tags -->
+    <meta name="geo.region" content="DE-BW" />
+    <meta name="geo.placename" content="Stuttgart" />
+    <meta name="geo.position" content="48.7249;9.2064" />
+    <meta name="ICBM" content="48.7249, 9.2064" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.sichtbarmitki.agency/" />
+    <meta property="og:site_name" content="DS Online Services - SichtbarmitKI.agency" />
+    <meta property="og:locale" content="de_DE" />
+    <meta
+      property="og:title"
+      content="DS Online Services | Digitalberatung, GEO & KI-Workflows - Dirk Schmetzer"
+    />
+    <meta
+      property="og:description"
+      content="Strategische Digitalberatung, Generative Engine Optimization (GEO), KI-Workflows, Prozessstrategie, Smart Web Analytics und E-Commerce Beratung."
+    />
+    <meta property="og:image" content="https://www.sichtbarmitki.agency/hero-preview.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.sichtbarmitki.agency/" />
+    <meta
+      name="twitter:title"
+      content="DS Online Services | Digitalberatung, GEO & KI-Workflows - Dirk Schmetzer"
+    />
+    <meta
+      name="twitter:description"
+      content="Strategische Digitalberatung, Generative Engine Optimization (GEO), KI-Workflows, Prozessstrategie und Smart Web Analytics."
+    />
+    <meta name="twitter:image" content="https://www.sichtbarmitki.agency/hero-preview.png" />
+
+    <!-- Google Consent Mode v2 (Default Configuration) -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+
+      (function() {
+        var stored = null;
+        try {
+          stored = JSON.parse(localStorage.getItem('sichtbarmitki_cookie_consent'));
+        } catch (e) {}
+
+        if (stored) {
+          gtag('consent', 'default', {
+            'analytics_storage': stored.analytics ? 'granted' : 'denied',
+            'ad_storage': stored.marketing ? 'granted' : 'denied',
+            'ad_user_data': stored.marketing ? 'granted' : 'denied',
+            'ad_personalization': stored.marketing ? 'granted' : 'denied',
+            'personalization_storage': stored.marketing ? 'granted' : 'denied',
+            'functionality_storage': 'granted',
+            'security_storage': 'granted'
+          });
+        } else {
+          gtag('consent', 'default', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'personalization_storage': 'denied',
+            'functionality_storage': 'granted',
+            'security_storage': 'granted'
+          });
+        }
+      })();
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WRLQVDM8');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Schema.org JSON-LD (SEO & Generative Engine Optimization / AI Search) -->
+    <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.sichtbarmitki.agency/#organization",
+          "name": "DS Online Services - SichtbarmitKI.agency",
+          "legalName": "DS Online Services",
+          "url": "https://www.sichtbarmitki.agency",
+          "logo": "https://www.sichtbarmitki.agency/sichtbar-icon.png",
+          "image": "https://www.sichtbarmitki.agency/dirk-schmetzer.png",
+          "description": "Strategische Digitalberatung, Generative Engine Optimization (GEO), KI-Workflows, Prozessstrategie, Smart Web Analytics und E-Commerce Beratung.",
+          "founder": {
+            "@type": "Person",
+            "@id": "https://www.sichtbarmitki.agency/#founder",
+            "name": "Dirk Schmetzer",
+            "jobTitle": "Senior Business & KI-Stratege, Gründer",
+            "sameAs": [
+              "https://www.linkedin.com/in/dirkschmetzer/"
+            ]
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Riedgrasweg 30",
+            "addressLocality": "Stuttgart",
+            "postalCode": "70599",
+            "addressCountry": "DE"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+49 1590 6122744",
+            "email": "hallo@sichtbarmitki.agency",
+            "contactType": "customer service",
+            "availableLanguage": ["German", "English"]
+          },
+          "sameAs": [
+            "https://www.linkedin.com/in/dirkschmetzer/"
+          ],
+          "knowsAbout": [
+            "Generative Engine Optimization (GEO)",
+            "Digitalberatung",
+            "KI-Prozesse",
+            "KI-Workflows",
+            "Prozessstrategie",
+            "Smart Web Analytics",
+            "Google Consent Mode v2",
+            "E-Commerce Beratung",
+            "Suchmaschinenoptimierung (SEO)",
+            "Prompt Engineering"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.sichtbarmitki.agency/#website",
+          "url": "https://www.sichtbarmitki.agency/",
+          "name": "SichtbarMitKI.agency",
+          "publisher": {
+            "@id": "https://www.sichtbarmitki.agency/#organization"
+          },
+          "inLanguage": "de-DE"
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://www.sichtbarmitki.agency/#service",
+          "name": "DS Online Services - Digitalberatung & GEO",
+          "provider": {
+            "@id": "https://www.sichtbarmitki.agency/#organization"
+          },
+          "areaServed": "DE",
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Digitale Beratungsleistungen",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "GEO / KI-Suchmaschinen-Sichtbarkeit",
+                  "description": "Optimierung von Marken und Inhalten für ChatGPT, Perplexity, Google AI Overviews und Gemini."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Strategische E-Commerce Beratung",
+                  "description": "Architektur- und Conversion-Strategie für Online-Shops (Shopify, WooCommerce & Co.) zur Skalierung und Baukasten-Ablöse."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Smarte Web Analytics & DSGVO-Tracking",
+                  "description": "Implementierung von Google Consent Mode v2, Server-Side Tracking und Echtzeit-Dashboards für datenbasierte Entscheidungen."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "KI-Workflows & Prozessstrategie",
+                  "description": "Konzeption und Einführung maßgeschneiderter KI-Automatisierungen und interner Workflows zur Kostensenkung."
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://www.sichtbarmitki.agency/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Was ist Generative Engine Optimization (GEO)?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Generative Engine Optimization (GEO) ist die strategische Optimierung Ihrer Web-Inhalte für generative KI-Suchmaschinen wie ChatGPT, Perplexity, Google Gemini und AI Overviews. Durch semantische Strukturierung, Schema-Markup und Zitationen wird Ihre Marke als autoritative Antwort von Sprachmodellen empfohlen."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Wie hilft eine Digitalberatung mit Fokus auf Prozessstrategie?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Eine strategische Digitalberatung analysiert die bestehende Systemarchitektur und Arbeitsabläufe, um repetitive Prozesse durch intelligente KI-Workflows zu automatisieren. Dies spart signifikant Personalkosten, beschleunigt Kundenreaktionszeiten und erhöht den betriebswirtschaftlichen ROI."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Was umfasst die E-Commerce Beratung bei DS Online Services?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Wir beraten Händler und Marken strategisch bei der Wahl und Optimierung ihrer Shop-Systeme (z. B. Shopify, WooCommerce), der Funnel-Optimierung und der Ablösung träger Baukästen – immer mit Fokus auf Skalierbarkeit, schnelle Ladezeiten und messbare Conversion-Steigerung."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Warum ist Smart Web Analytics mit Google Consent Mode v2 so wichtig?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ohne Consent Mode v2 gehen wertvolle Tracking-Daten verloren oder es drohen Abmahnrisiken. Smarte Web Analytics kombiniert 100%ige DSGVO-Konformität mit belastbaren Kennzahlen für verlässliche unternehmerische Entscheidungen."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body class="bg-slate-950 text-slate-100 min-h-screen antialiased selection:bg-blue-500/30 selection:text-blue-200">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WRLQVDM8"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <App client:load />
   </body>
 </html>

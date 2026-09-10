@@ -1254,7 +1254,7 @@ export default function App() {
                   <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
                   <span>100% DSGVO-konform</span>
                 </span>
-                <span className="truncate ml-2">Kopie an hallo@ & dirk.online.services@</span>
+                <span className="text-slate-400">Kostenlos & unverbindlich</span>
               </div>
             </div>
           </div>
