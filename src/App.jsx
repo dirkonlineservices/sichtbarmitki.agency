@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CookieBanner from './components/CookieBanner.jsx';
+import ImpressumView from './components/ImpressumView.jsx';
+import DatenschutzView from './components/DatenschutzView.jsx';
 import {
   Sparkles,
   LineChart,
@@ -39,6 +41,16 @@ function WhatsAppIcon({ className = "w-5 h-5" }) {
 }
 
 export default function App() {
+  const [currentRoute, setCurrentRoute] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname.replace(/\/$/, '').toLowerCase();
+      if (path === '/impressum' || path === '/datenschutz') {
+        return path;
+      }
+    }
+    return '/';
+  });
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cookieBannerManualOpen, setCookieBannerManualOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -51,6 +63,29 @@ export default function App() {
     phone: '',
     message: ''
   });
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname.replace(/\/$/, '').toLowerCase();
+      if (path === '/impressum' || path === '/datenschutz') {
+        setCurrentRoute(path);
+      } else {
+        setCurrentRoute('/');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigate = (path) => {
+    if (typeof window !== 'undefined') {
+      window.history.pushState({}, '', path);
+      const cleanPath = path.replace(/\/$/, '').toLowerCase();
+      setCurrentRoute(cleanPath || '/');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const whatsappNumber = "4915906122744";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
@@ -287,6 +322,38 @@ export default function App() {
         "Im unverbindlichen 30-minütigen Gespräch via Google Meet oder Telefon werfen wir einen direkten Blick auf Ihre Website, Ihren Shop und Ihre bisherige KI-Sichtbarkeit. Sie erhalten mindestens drei konkrete Handlungsempfehlungen, die Sie sofort umsetzen können – transparent, partnerschaftlich und ohne Verkaufsdruck."
     }
   ];
+
+  if (currentRoute === '/impressum') {
+    return (
+      <>
+        <ImpressumView
+          onNavigateHome={() => navigate('/')}
+          onNavigateDatenschutz={() => navigate('/datenschutz')}
+          onOpenCookies={() => setCookieBannerManualOpen(true)}
+        />
+        <CookieBanner
+          isOpenManually={cookieBannerManualOpen}
+          onCloseManual={() => setCookieBannerManualOpen(false)}
+        />
+      </>
+    );
+  }
+
+  if (currentRoute === '/datenschutz') {
+    return (
+      <>
+        <DatenschutzView
+          onNavigateHome={() => navigate('/')}
+          onNavigateImpressum={() => navigate('/impressum')}
+          onOpenCookies={() => setCookieBannerManualOpen(true)}
+        />
+        <CookieBanner
+          isOpenManually={cookieBannerManualOpen}
+          onCloseManual={() => setCookieBannerManualOpen(false)}
+        />
+      </>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-blue-600/30 selection:text-blue-200">
@@ -1288,10 +1355,24 @@ export default function App() {
             >
               Cookie-Einstellungen
             </button>
-            <a href="/impressum" className="hover:text-slate-300 transition-colors underline underline-offset-4">
+            <a
+              href="/impressum"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/impressum');
+              }}
+              className="hover:text-slate-300 transition-colors underline underline-offset-4"
+            >
               Impressum
             </a>
-            <a href="/datenschutz" className="hover:text-slate-300 transition-colors underline underline-offset-4">
+            <a
+              href="/datenschutz"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/datenschutz');
+              }}
+              className="hover:text-slate-300 transition-colors underline underline-offset-4"
+            >
               Datenschutz
             </a>
           </div>

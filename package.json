@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "vite",
     "dev:astro": "astro dev",
-    "build": "astro build",
+    "build": "vite build",
     "build:vite": "vite build",
     "build:astro": "astro build",
     "preview": "astro preview",
