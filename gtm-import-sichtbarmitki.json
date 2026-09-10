@@ -170,7 +170,7 @@
         "accountId": "6322475669",
         "containerId": "10000001",
         "triggerId": "11",
-        "name": "Klick - Telefon (tel:)",
+        "name": "Klick - Telefon (tel)",
         "type": "LINK_CLICK",
         "filter": [
           {
@@ -202,7 +202,7 @@
         "accountId": "6322475669",
         "containerId": "10000001",
         "triggerId": "12",
-        "name": "Klick - E-Mail (mailto:)",
+        "name": "Klick - E-Mail (mailto)",
         "type": "LINK_CLICK",
         "filter": [
           {
