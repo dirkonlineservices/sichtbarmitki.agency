@@ -51,15 +51,20 @@ export default function CookieBanner({ isOpenManually, onCloseManual }) {
 
   useEffect(() => {
     // Check if user already consented
-    const stored = localStorage.getItem(CONSENT_STORAGE_KEY);
-    if (stored) {
-      try {
+    try {
+      const stored = localStorage.getItem(CONSENT_STORAGE_KEY);
+      if (stored) {
         const parsed = JSON.parse(stored);
         setConsent(parsed);
         updateGtagConsent(parsed);
-      } catch (e) {}
+      } else {
+        // No stored consent (e.g. Incognito or first-time visitor) -> Show banner for DSGVO compliance
+        setIsVisible(true);
+      }
+    } catch (e) {
+      // In case localStorage is blocked or throws an error in strict Incognito mode
+      setIsVisible(true);
     }
-    // Note: Auto-popup disabled for now as requested by user ("Den Consent Banner machen wir später")
   }, []);
 
   // When triggered via Footer button
@@ -72,7 +77,9 @@ export default function CookieBanner({ isOpenManually, onCloseManual }) {
 
   const saveConsent = (updatedConsent) => {
     setConsent(updatedConsent);
-    localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(updatedConsent));
+    try {
+      localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(updatedConsent));
+    } catch (e) {}
     updateGtagConsent(updatedConsent);
     setIsVisible(false);
     setShowDetails(false);
