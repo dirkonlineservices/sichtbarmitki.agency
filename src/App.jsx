@@ -25,7 +25,9 @@ import {
   ShoppingBag,
   Compass,
   MessageCircle,
-  Loader2
+  Loader2,
+  ChevronDown,
+  HelpCircle
 } from 'lucide-react';
 
 function WhatsAppIcon({ className = "w-5 h-5" }) {
@@ -39,6 +41,7 @@ function WhatsAppIcon({ className = "w-5 h-5" }) {
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cookieBannerManualOpen, setCookieBannerManualOpen] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -257,6 +260,34 @@ export default function App() {
     }
   ];
 
+  const faqs = [
+    {
+      question: "Was ist Generative Engine Optimization (GEO)?",
+      answer:
+        "Generative Engine Optimization (GEO) ist die gezielte Optimierung Ihrer digitalen Präsenz für KI-Suchsysteme wie ChatGPT Search, Perplexity, Google Gemini und AI Overviews. Durch semantisch saubere Strukturierung, validiertes Schema-Markup und Zitations-Optimierung platzieren wir Ihre Marke als maßgebliche Expertenquelle in den Antworten der Large Language Models."
+    },
+    {
+      question: "Wie hilft eine Digitalberatung mit Fokus auf Prozessstrategie?",
+      answer:
+        "Eine fundierte Digitalberatung durchleuchtet Ihre Arbeitsabläufe und IT-Architektur. Wir identifizieren ineffiziente manuelle Zwischenschritte und etablieren schlanke, KI-gestützte Workflows (z. B. automatisierte Lead-Vorqualifizierung, KI-Assistenz im Support). Das spart signifikant Arbeitszeit und steigert Ihre Marge."
+    },
+    {
+      question: "Was umfasst die strategische E-Commerce Beratung?",
+      answer:
+        "Wir unterstützen E-Commerce-Unternehmen und Online-Shops (Shopify, WooCommerce, Eigenentwicklungen) bei der Skalierung: Architektur-Reviews, Baukasten-Ablösung ohne Vendor-Lock-in, Conversion-Rate-Optimierung (CRO) und Performance-Steigerung für maximale Kaufabschlüsse."
+    },
+    {
+      question: "Warum ist Smart Web Analytics mit Google Consent Mode v2 unverzichtbar?",
+      answer:
+        "Klassisches Tracking verliert ohne sauberen Consent Mode v2 bis zu 40% der Conversion-Daten oder verstößt gegen die DSGVO. Wir richten Server-Side Tracking, den Google Tag Manager und den Consent Mode v2 so ein, dass Sie rechtssicher vollständige Daten für Ihre Marketing-Entscheidungen erhalten."
+    },
+    {
+      question: "Wie läuft ein kostenloses Erstgespräch mit Dirk Schmetzer ab?",
+      answer:
+        "Im unverbindlichen 30-minütigen Gespräch via Google Meet oder Telefon werfen wir einen direkten Blick auf Ihre Website, Ihren Shop und Ihre bisherige KI-Sichtbarkeit. Sie erhalten mindestens drei konkrete Handlungsempfehlungen, die Sie sofort umsetzen können – transparent, partnerschaftlich und ohne Verkaufsdruck."
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-blue-600/30 selection:text-blue-200">
       {/* Ambient background glow layers */}
@@ -310,6 +341,7 @@ export default function App() {
             <a href="#referenzen" className="hover:text-white transition-colors">Referenzen</a>
             <a href="#ueber-mich" className="hover:text-white transition-colors">Über Dirk</a>
             <a href="#vorteile" className="hover:text-white transition-colors">Vorteile</a>
+            <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
             <a href="#kontakt" className="hover:text-white transition-colors">Kontakt</a>
           </nav>
 
@@ -373,6 +405,13 @@ export default function App() {
               className="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-white text-base font-medium"
             >
               Vorteile
+            </a>
+            <a
+              href="#faq"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-white text-base font-medium"
+            >
+              FAQ
             </a>
             <a
               href="#kontakt"
@@ -827,6 +866,93 @@ export default function App() {
                   className="h-7 object-contain opacity-80"
                 />
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4b. FAQ - Häufig gestellte Fragen (GEO & KI-Sichtbarkeit) */}
+      <section id="faq" className="py-24 bg-slate-950 border-t border-slate-900 relative">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-4">
+              <HelpCircle className="w-3.5 h-3.5" />
+              <span>Häufige Fragen & Antworten</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              Klarheit zu Digitalberatung, <br className="hidden sm:inline" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                GEO & KI-Workflows
+              </span>
+            </h2>
+            <p className="mt-4 text-slate-400 text-sm sm:text-base leading-relaxed">
+              Die wichtigsten Antworten rund um die Auffindbarkeit in generativen Sprachmodellen, smarte Web-Analytics und die Zusammenarbeit mit Dirk Schmetzer.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, index) => {
+              const isOpen = openFaqIndex === index;
+              return (
+                <div
+                  key={index}
+                  className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
+                    isOpen
+                      ? 'bg-slate-900/90 border-blue-500/40 shadow-lg shadow-blue-500/5'
+                      : 'bg-slate-900/40 border-slate-800 hover:border-slate-700 hover:bg-slate-900/60'
+                  }`}
+                >
+                  <button
+                    onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                    className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="font-bold text-white text-base sm:text-lg tracking-tight">
+                      {faq.question}
+                    </span>
+                    <div
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 ${
+                        isOpen
+                          ? 'rotate-180 bg-blue-500/20 text-blue-400'
+                          : 'bg-slate-800 text-slate-400'
+                      }`}
+                    >
+                      <ChevronDown className="w-4 h-4" />
+                    </div>
+                  </button>
+
+                  {isOpen && (
+                    <div className="px-6 pb-5 pt-1 text-sm sm:text-base text-slate-300 leading-relaxed border-t border-slate-800/60 mt-1">
+                      {faq.answer}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Quick CTA inside FAQ */}
+          <div className="mt-12 text-center bg-slate-900/30 border border-slate-800/60 rounded-2xl p-6">
+            <p className="text-sm text-slate-300 mb-3">
+              Haben Sie eine spezifische Frage zu Ihrem Unternehmen oder Ihrer Systemarchitektur?
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="#kontakt"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 transition-all shadow-sm"
+              >
+                <span>Frage direkt an Dirk stellen</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold text-emerald-300 bg-emerald-950/60 border border-emerald-500/30 hover:bg-emerald-900/60 transition-all"
+              >
+                <WhatsAppIcon className="w-3.5 h-3.5 fill-emerald-400" />
+                <span>Per WhatsApp nachfragen</span>
+              </a>
             </div>
           </div>
         </div>
