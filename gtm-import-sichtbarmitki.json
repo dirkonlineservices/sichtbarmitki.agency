@@ -1,15 +1,15 @@
 {
   "exportFormatVersion": 2,
-  "exportTime": "2026-09-10 12:35:00",
+  "exportTime": "2026-09-10 12:40:00",
   "containerVersion": {
-    "path": "accounts/6322475669/containers/GTM-WRLQVDM8/versions/0",
+    "path": "accounts/6322475669/containers/10000001/versions/0",
     "accountId": "6322475669",
-    "containerId": "GTM-WRLQVDM8",
+    "containerId": "10000001",
     "containerVersionId": "0",
     "container": {
-      "path": "accounts/6322475669/containers/GTM-WRLQVDM8",
+      "path": "accounts/6322475669/containers/10000001",
       "accountId": "6322475669",
-      "containerId": "GTM-WRLQVDM8",
+      "containerId": "10000001",
       "name": "sichtbarmitki.agency",
       "publicId": "GTM-WRLQVDM8",
       "usageContext": [
@@ -19,49 +19,43 @@
     "tag": [
       {
         "accountId": "6322475669",
-        "containerId": "GTM-WRLQVDM8",
+        "containerId": "10000001",
         "tagId": "1",
         "name": "GA4 - Google Tag (G-F5ML2ZF2P6)",
         "type": "googtag",
         "parameter": [
           {
-            "type": "BOOLEAN",
-            "key": "sendPageView",
-            "value": "true"
-          },
-          {
             "type": "TEMPLATE",
             "key": "tagId",
             "value": "G-F5ML2ZF2P6"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "sendPageView",
+            "value": "true"
           }
         ],
         "firingTriggerId": [
           "2147479553"
         ],
-        "tagFiringOption": "ONCE_PER_EVENT",
-        "monitoringMetadata": {
-          "type": "MAP"
-        },
-        "consentSettings": {
-          "consentStatus": "NOT_SET"
-        }
+        "tagFiringOption": "ONCE_PER_EVENT"
       },
       {
         "accountId": "6322475669",
-        "containerId": "GTM-WRLQVDM8",
+        "containerId": "10000001",
         "tagId": "2",
         "name": "GA4 Event - WhatsApp Klick",
-        "type": "gaaw_event",
+        "type": "gaawe",
         "parameter": [
-          {
-            "type": "TEMPLATE",
-            "key": "measurementId",
-            "value": "G-F5ML2ZF2P6"
-          },
           {
             "type": "TEMPLATE",
             "key": "eventName",
             "value": "click_whatsapp"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "G-F5ML2ZF2P6"
           }
         ],
         "firingTriggerId": [
@@ -71,20 +65,20 @@
       },
       {
         "accountId": "6322475669",
-        "containerId": "GTM-WRLQVDM8",
+        "containerId": "10000001",
         "tagId": "3",
         "name": "GA4 Event - Telefon Klick",
-        "type": "gaaw_event",
+        "type": "gaawe",
         "parameter": [
-          {
-            "type": "TEMPLATE",
-            "key": "measurementId",
-            "value": "G-F5ML2ZF2P6"
-          },
           {
             "type": "TEMPLATE",
             "key": "eventName",
             "value": "click_phone"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "G-F5ML2ZF2P6"
           }
         ],
         "firingTriggerId": [
@@ -94,20 +88,20 @@
       },
       {
         "accountId": "6322475669",
-        "containerId": "GTM-WRLQVDM8",
+        "containerId": "10000001",
         "tagId": "4",
         "name": "GA4 Event - E-Mail Klick",
-        "type": "gaaw_event",
+        "type": "gaawe",
         "parameter": [
-          {
-            "type": "TEMPLATE",
-            "key": "measurementId",
-            "value": "G-F5ML2ZF2P6"
-          },
           {
             "type": "TEMPLATE",
             "key": "eventName",
             "value": "click_email"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "G-F5ML2ZF2P6"
           }
         ],
         "firingTriggerId": [
@@ -117,20 +111,20 @@
       },
       {
         "accountId": "6322475669",
-        "containerId": "GTM-WRLQVDM8",
+        "containerId": "10000001",
         "tagId": "5",
         "name": "GA4 Event - Lead Generierung (Formular)",
-        "type": "gaaw_event",
+        "type": "gaawe",
         "parameter": [
-          {
-            "type": "TEMPLATE",
-            "key": "measurementId",
-            "value": "G-F5ML2ZF2P6"
-          },
           {
             "type": "TEMPLATE",
             "key": "eventName",
             "value": "generate_lead"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "G-F5ML2ZF2P6"
           }
         ],
         "firingTriggerId": [
@@ -142,7 +136,7 @@
     "trigger": [
       {
         "accountId": "6322475669",
-        "containerId": "GTM-WRLQVDM8",
+        "containerId": "10000001",
         "triggerId": "10",
         "name": "Klick - WhatsApp (wa.me)",
         "type": "LINK_CLICK",
@@ -174,7 +168,7 @@
       },
       {
         "accountId": "6322475669",
-        "containerId": "GTM-WRLQVDM8",
+        "containerId": "10000001",
         "triggerId": "11",
         "name": "Klick - Telefon (tel:)",
         "type": "LINK_CLICK",
@@ -206,7 +200,7 @@
       },
       {
         "accountId": "6322475669",
-        "containerId": "GTM-WRLQVDM8",
+        "containerId": "10000001",
         "triggerId": "12",
         "name": "Klick - E-Mail (mailto:)",
         "type": "LINK_CLICK",
@@ -238,7 +232,7 @@
       },
       {
         "accountId": "6322475669",
-        "containerId": "GTM-WRLQVDM8",
+        "containerId": "10000001",
         "triggerId": "13",
         "name": "Event - Formular erfolgreich abgesendet",
         "type": "CUSTOM_EVENT",
@@ -264,19 +258,19 @@
     "builtInVariable": [
       {
         "accountId": "6322475669",
-        "containerId": "GTM-WRLQVDM8",
+        "containerId": "10000001",
         "type": "CLICK_URL",
         "name": "Click URL"
       },
       {
         "accountId": "6322475669",
-        "containerId": "GTM-WRLQVDM8",
+        "containerId": "10000001",
         "type": "EVENT",
         "name": "Event"
       },
       {
         "accountId": "6322475669",
-        "containerId": "GTM-WRLQVDM8",
+        "containerId": "10000001",
         "type": "PAGE_URL",
         "name": "Page URL"
       }
