@@ -323,6 +323,72 @@ export default function App() {
     }
   ];
 
+  const pricingPackages = [
+    {
+      id: 'audit',
+      badge: 'Perfekter Einstieg',
+      title: '360° GEO- & Digital-Audit',
+      price: '490 €',
+      period: 'Einmaliger Festpreis',
+      description: 'Präzise Standortbestimmung, Aufdeckung von Schwachstellen und ein priorisierter Fahrplan für messbare KI-Sichtbarkeit.',
+      features: [
+        'Prüfung der Auffindbarkeit in ChatGPT, Perplexity, Gemini & Google AI',
+        'Schwachstellen-Check bei Ladezeiten, Shop-Architektur & Baukasten-Limits',
+        'DSGVO- & Google Consent Mode v2 Sicherheitsprüfung',
+        'Schriftlicher Maßnahmenplan mit priorisierten Quick-Wins',
+        '60 Min. persönlicher 1:1 Video-Call zur Auswertung mit Dirk'
+      ],
+      cta: 'Audit anfragen',
+      popular: false
+    },
+    {
+      id: 'setup',
+      badge: 'Empfehlung • Bestseller',
+      title: 'KI-Workflows & GEO-Setup',
+      price: '1.290 €',
+      period: 'Einmalig • Schlüsselfertige Umsetzung',
+      description: 'Ganzheitliche Implementierung für Unternehmen, die als führende Antwort in KI-Suchmaschinen empfohlen werden und Workflows automatisieren wollen.',
+      features: [
+        'Alles aus dem 360° Audit vollständig inklusive',
+        'Hands-on Implementierung semantischer Schema.org Markup-Strukturen',
+        'Saubere Einrichtung von Google Consent Mode v2 & Analytics',
+        'Konzeption & Bau Ihres ersten maßgeschneiderten KI-Workflows',
+        'Shop- & Funnel-Optimierung zur messbaren Conversion-Steigerung',
+        '14 Tage persönliche Nachbetreuung & Feinschliff nach Go-Live'
+      ],
+      cta: 'Setup anfragen',
+      popular: true
+    },
+    {
+      id: 'sparring',
+      badge: 'Laufende Begleitung',
+      title: '1:1 Strategie-Sparring & Betreuung',
+      price: '90 €',
+      period: 'pro Stunde • Stundengenau & flexibel',
+      description: 'Ihr direkter strategischer Partner für Digitalisierung, Tool-Auswahl und unternehmerische Prozessoptimierung auf Augenhöhe.',
+      features: [
+        'Persönliches 1:1 Sparring mit Senior Stratege Dirk Schmetzer',
+        'Begleitung bei Tool-Evaluierung, KI-Einführung & Shop-Architektur',
+        'Keine Mindestvertragslaufzeit – transparente Abrechnung nach Aufwand',
+        'Direkter Draht & schneller Austausch via WhatsApp & E-Mail',
+        'Auf Wunsch als planbarer monatlicher Retainer gestaltbar'
+      ],
+      cta: 'Sparring anfragen',
+      popular: false
+    }
+  ];
+
+  const handleSelectPackage = (pkg) => {
+    setFormData((prev) => ({
+      ...prev,
+      message: `Hallo Dirk, ich interessiere mich für das Paket "${pkg.title}" (${pkg.price}). Können wir dazu ein unverbindliches Erstgespräch führen?`
+    }));
+    const kontaktEl = document.getElementById('kontakt');
+    if (kontaktEl) {
+      kontaktEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   if (currentRoute === '/impressum') {
     return (
       <>
@@ -407,6 +473,7 @@ export default function App() {
             <a href="#services" className="hover:text-white transition-colors">Leistungen</a>
             <a href="#referenzen" className="hover:text-white transition-colors">Referenzen</a>
             <a href="#ueber-mich" className="hover:text-white transition-colors">Über Dirk</a>
+            <a href="#pakete" className="hover:text-white transition-colors">Pakete</a>
             <a href="#vorteile" className="hover:text-white transition-colors">Vorteile</a>
             <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
             <a href="#kontakt" className="hover:text-white transition-colors">Kontakt</a>
@@ -465,6 +532,13 @@ export default function App() {
               className="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-white text-base font-medium"
             >
               Über Dirk Schmetzer
+            </a>
+            <a
+              href="#pakete"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900 hover:text-white text-base font-medium"
+            >
+              Pakete & Preise
             </a>
             <a
               href="#vorteile"
@@ -1025,7 +1099,125 @@ export default function App() {
         </div>
       </section>
 
-      {/* 5. Kontakt-Sektion / CTA am Ende */}
+      {/* 5. Transparente Pakete & Investition */}
+      <section id="pakete" className="py-20 sm:py-28 relative border-t border-slate-800/80 bg-gradient-to-b from-slate-950 via-slate-900/40 to-slate-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+            <span className="text-xs font-bold uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 px-3.5 py-1 rounded-full">
+              Transparente Investition & faire Modelle
+            </span>
+            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+              Wähle das passende Paket für deinen Erfolg
+            </h2>
+            <p className="mt-4 text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+              Faire Festpreise und flexibles Sparring ohne versteckte Kosten. Wir verkaufen messbare Resultate statt zeitraubender Stundenkontingente.
+            </p>
+          </div>
+
+          {/* 3 Spalten Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-6xl mx-auto">
+            {pricingPackages.map((pkg) => {
+              const isHighlighted = pkg.popular;
+              return (
+                <div
+                  key={pkg.id}
+                  className={`rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 relative ${
+                    isHighlighted
+                      ? 'bg-slate-900/90 border-2 border-blue-500/80 shadow-2xl shadow-blue-500/20 ring-1 ring-blue-500/40 lg:-translate-y-2'
+                      : 'bg-slate-900/60 border border-slate-800 hover:border-slate-700 shadow-xl'
+                  }`}
+                >
+                  {/* Badge */}
+                  {isHighlighted && (
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[11px] font-extrabold uppercase tracking-wider shadow-lg shadow-blue-500/30 flex items-center gap-1.5 whitespace-nowrap">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>Empfehlung • Bestseller</span>
+                    </div>
+                  )}
+
+                  <div>
+                    {!isHighlighted && (
+                      <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold text-blue-400 bg-blue-500/10 border border-blue-500/20 mb-4">
+                        {pkg.badge}
+                      </div>
+                    )}
+                    {isHighlighted && <div className="h-2 mb-3" />}
+
+                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                      {pkg.title}
+                    </h3>
+                    <p className="mt-2 text-xs sm:text-sm text-slate-400 leading-relaxed min-h-[40px]">
+                      {pkg.description}
+                    </p>
+
+                    {/* Preis */}
+                    <div className="mt-6 pb-6 border-b border-slate-800/80">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+                          {pkg.price}
+                        </span>
+                      </div>
+                      <span className="text-xs font-medium text-slate-400 block mt-1">
+                        {pkg.period}
+                      </span>
+                    </div>
+
+                    {/* Features Liste */}
+                    <ul className="mt-6 space-y-3.5 text-xs sm:text-sm text-slate-300">
+                      {pkg.features.map((feat, idx) => (
+                        <li key={idx} className="flex items-start gap-2.5">
+                          <CheckCircle2
+                            className={`w-4 h-4 shrink-0 mt-0.5 ${
+                              isHighlighted ? 'text-blue-400' : 'text-emerald-400'
+                            }`}
+                          />
+                          <span className="leading-relaxed">{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* CTA Button */}
+                  <div className="mt-8 pt-6 border-t border-slate-800/80">
+                    <button
+                      onClick={() => handleSelectPackage(pkg)}
+                      className={`w-full py-3.5 px-5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                        isHighlighted
+                          ? 'text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 shadow-lg shadow-blue-500/25 active:scale-98'
+                          : 'text-slate-200 bg-slate-800/90 hover:bg-slate-750 hover:text-white border border-slate-700 active:scale-98'
+                      }`}
+                    >
+                      <span>{pkg.cta}</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Kleiner Infoblock zur Kleinunternehmerregelung & Transparenz */}
+          <div className="mt-12 sm:mt-16 bg-slate-900/50 border border-slate-800/80 rounded-2xl p-6 sm:p-8 text-center max-w-4xl mx-auto backdrop-blur-sm">
+            <div className="flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm font-semibold text-slate-300 mb-2.5">
+              <span className="inline-flex items-center gap-1.5 text-blue-400">
+                <ShieldCheck className="w-4 h-4" />
+                <span>Transparenz & Planungssicherheit</span>
+              </span>
+              <span className="text-slate-600 hidden sm:inline">•</span>
+              <span>Endpreise gemäß § 19 UStG (keine MwSt.)</span>
+              <span className="text-slate-600 hidden sm:inline">•</span>
+              <span>Keine versteckten Gebühren</span>
+            </div>
+            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-2xl mx-auto">
+              Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird keine Umsatzsteuer berechnet oder ausgewiesen.
+              Im unverbindlichen 30-minütigen Erstgespräch ermitteln wir gemeinsam, welches Setup für Ihre aktuellen Ziele den höchsten wirtschaftlichen Mehrwert stiftet.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Kontakt-Sektion / CTA am Ende */}
       <section id="kontakt" className="py-20 sm:py-28 bg-slate-900/30 border-t border-slate-800/80 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Synchroner, zentrierter Section-Header */}
