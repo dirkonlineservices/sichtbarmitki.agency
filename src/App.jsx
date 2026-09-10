@@ -541,7 +541,7 @@ export default function App() {
               <div className="relative mb-6">
                 <div className="w-36 h-36 mx-auto rounded-3xl overflow-hidden border-2 border-blue-500/40 shadow-2xl shadow-blue-500/20 relative group">
                   <img
-                    src="/dirk-schmetzer-0.jpg"
+                    src="/dirk-schmetzer.png"
                     alt="Dirk Schmetzer"
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
@@ -681,7 +681,7 @@ export default function App() {
               <div className="flex items-center gap-3.5">
                 <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500/40 shadow-md shrink-0">
                   <img
-                    src="/dirk-schmetzer-0.jpg"
+                    src="/dirk-schmetzer.png"
                     alt="Dirk Schmetzer"
                     className="w-full h-full object-cover"
                   />
