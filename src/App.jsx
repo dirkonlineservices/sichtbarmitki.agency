@@ -56,6 +56,8 @@ export default function App() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState(null);
+  const [hoveredPackageId, setHoveredPackageId] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -63,6 +65,8 @@ export default function App() {
     phone: '',
     message: ''
   });
+
+  const activePackageId = hoveredPackageId || (selectedPackage ? selectedPackage.id : 'setup');
 
   useEffect(() => {
     const handlePopState = () => {
@@ -88,13 +92,36 @@ export default function App() {
   };
 
   const whatsappNumber = "4915906122744";
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-    "Hallo Dirk, ich interessiere mich für ein strategisches Erstgespräch zu GEO, KI-Sichtbarkeit und E-Commerce Beratung."
-  )}`;
+
+  const currentWhatsappText = selectedPackage
+    ? `Hallo Dirk, ich interessiere mich für das Paket "${selectedPackage.title}" (${selectedPackage.price}). Hast du Zeit für ein unverbindliches Erstgespräch?`
+    : "Hallo Dirk, ich interessiere mich für ein strategisches Erstgespräch zu GEO, KI-Sichtbarkeit und E-Commerce Beratung.";
+
+  const currentWhatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(currentWhatsappText)}`;
+
+  const currentEmailSubject = selectedPackage
+    ? `Anfrage für Paket [${selectedPackage.title}] - DS Online Services`
+    : "Kostenloses Erstgespräch anfragen - DS Online Services";
+
+  const currentEmailBody = selectedPackage
+    ? `Hallo Dirk,\n\nich interessiere mich für das Paket "${selectedPackage.title}" (${selectedPackage.price}).\n\nBitte melden Sie sich bezüglich eines unverbindlichen Erstgesprächs bei mir.\n\nViele Grüße\n[Ihr Name]\n[Ihr Unternehmen/Telefon]`
+    : `Hallo Dirk,\n\nich interessiere mich für ein strategisches Erstgespräch zu GEO, KI-Sichtbarkeit und Prozessberatung.\n\nViele Grüße\n[Ihr Name]\n[Ihr Unternehmen/Telefon]`;
+
+  const currentMailtoUrl = `mailto:hallo@sichtbarmitki.agency?cc=dirk.online.services@gmail.com&subject=${encodeURIComponent(
+    currentEmailSubject
+  )}&body=${encodeURIComponent(currentEmailBody)}`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const emailSubject = selectedPackage
+      ? `Neue Anfrage für [${selectedPackage.title}] von ${formData.name}`
+      : `Neue Kontaktanfrage von ${formData.name} (sichtbarmitki.agency)`;
+
+    const packageName = selectedPackage
+      ? `${selectedPackage.title} (${selectedPackage.price})`
+      : 'Individuelle Anfrage';
 
     try {
       // Send directly to primary email with CC to gmail
@@ -109,9 +136,10 @@ export default function App() {
           Email: formData.email,
           Telefon: formData.phone || 'Nicht angegeben',
           Unternehmen: formData.company || 'Nicht angegeben',
+          Ausgewaehltes_Paket: packageName,
           Nachricht: formData.message || 'Keine Nachricht angegeben',
           _cc: 'dirk.online.services@gmail.com',
-          _subject: `Neue Kontaktanfrage von ${formData.name} (sichtbarmitki.agency)`,
+          _subject: emailSubject,
           _template: 'table',
           _captcha: 'false'
         })
@@ -122,17 +150,17 @@ export default function App() {
       } else {
         // Mailto fallback
         window.location.href = `mailto:hallo@sichtbarmitki.agency?cc=dirk.online.services@gmail.com&subject=${encodeURIComponent(
-          `Neue Anfrage von ${formData.name}`
+          emailSubject
         )}&body=${encodeURIComponent(
-          `Name: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.phone}\nUnternehmen: ${formData.company}\n\nNachricht:\n${formData.message}`
+          `Name: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.phone}\nUnternehmen: ${formData.company}\nAusgewähltes Paket: ${packageName}\n\nNachricht:\n${formData.message}`
         )}`;
         setFormSubmitted(true);
       }
     } catch (err) {
       window.location.href = `mailto:hallo@sichtbarmitki.agency?cc=dirk.online.services@gmail.com&subject=${encodeURIComponent(
-        `Neue Anfrage von ${formData.name}`
+        emailSubject
       )}&body=${encodeURIComponent(
-        `Name: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.phone}\nUnternehmen: ${formData.company}\n\nNachricht:\n${formData.message}`
+        `Name: ${formData.name}\nE-Mail: ${formData.email}\nTelefon: ${formData.phone}\nUnternehmen: ${formData.company}\nAusgewähltes Paket: ${packageName}\n\nNachricht:\n${formData.message}`
       )}`;
       setFormSubmitted(true);
     } finally {
@@ -379,6 +407,8 @@ export default function App() {
   ];
 
   const handleSelectPackage = (pkg) => {
+    setSelectedPackage(pkg);
+    setHoveredPackageId(pkg.id);
     setFormData((prev) => ({
       ...prev,
       message: `Hallo Dirk, ich interessiere mich für das Paket "${pkg.title}" (${pkg.price}). Können wir dazu ein unverbindliches Erstgespräch führen?`
@@ -1118,33 +1148,53 @@ export default function App() {
           {/* 3 Spalten Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-6xl mx-auto">
             {pricingPackages.map((pkg) => {
-              const isHighlighted = pkg.popular;
+              const isHighlighted = activePackageId === pkg.id;
+              const isSelected = selectedPackage?.id === pkg.id;
+
               return (
                 <div
                   key={pkg.id}
-                  className={`rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 relative ${
+                  onMouseEnter={() => setHoveredPackageId(pkg.id)}
+                  onMouseLeave={() => setHoveredPackageId(null)}
+                  onClick={() => handleSelectPackage(pkg)}
+                  className={`rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 ease-out relative cursor-pointer ${
                     isHighlighted
-                      ? 'bg-slate-900/90 border-2 border-blue-500/80 shadow-2xl shadow-blue-500/20 ring-1 ring-blue-500/40 lg:-translate-y-2'
-                      : 'bg-slate-900/60 border border-slate-800 hover:border-slate-700 shadow-xl'
+                      ? 'bg-slate-900/95 border-2 border-blue-500 shadow-2xl shadow-blue-500/25 ring-2 ring-blue-500/40 lg:-translate-y-3 scale-[1.02] z-10'
+                      : 'bg-slate-900/60 border border-slate-800 hover:border-slate-700 shadow-xl opacity-90 hover:opacity-100 lg:translate-y-0 scale-100'
                   }`}
                 >
                   {/* Badge */}
-                  {isHighlighted && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[11px] font-extrabold uppercase tracking-wider shadow-lg shadow-blue-500/30 flex items-center gap-1.5 whitespace-nowrap">
-                      <Sparkles className="w-3.5 h-3.5" />
+                  {pkg.popular ? (
+                    <div
+                      className={`absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-white text-[11px] font-extrabold uppercase tracking-wider shadow-lg flex items-center gap-1.5 whitespace-nowrap transition-all duration-300 ${
+                        isHighlighted
+                          ? 'bg-gradient-to-r from-blue-600 to-indigo-600 shadow-blue-500/40 scale-105'
+                          : 'bg-slate-800 border border-slate-700 text-slate-300'
+                      }`}
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-blue-400" />
                       <span>Empfehlung • Bestseller</span>
                     </div>
-                  )}
+                  ) : isSelected ? (
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-emerald-600 text-white text-[11px] font-extrabold uppercase tracking-wider shadow-lg shadow-emerald-500/30 flex items-center gap-1.5 whitespace-nowrap">
+                      <Check className="w-3.5 h-3.5" />
+                      <span>Ausgewählt</span>
+                    </div>
+                  ) : null}
 
                   <div>
-                    {!isHighlighted && (
+                    {!pkg.popular && !isSelected && (
                       <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold text-blue-400 bg-blue-500/10 border border-blue-500/20 mb-4">
                         {pkg.badge}
                       </div>
                     )}
-                    {isHighlighted && <div className="h-2 mb-3" />}
+                    {(pkg.popular || isSelected) && <div className="h-2 mb-3" />}
 
-                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                    <h3
+                      className={`text-xl sm:text-2xl font-bold tracking-tight transition-colors ${
+                        isHighlighted ? 'text-white' : 'text-slate-100'
+                      }`}
+                    >
                       {pkg.title}
                     </h3>
                     <p className="mt-2 text-xs sm:text-sm text-slate-400 leading-relaxed min-h-[40px]">
@@ -1154,7 +1204,11 @@ export default function App() {
                     {/* Preis */}
                     <div className="mt-6 pb-6 border-b border-slate-800/80">
                       <div className="flex items-baseline gap-2">
-                        <span className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+                        <span
+                          className={`text-4xl sm:text-5xl font-extrabold tracking-tight transition-colors ${
+                            isHighlighted ? 'text-white' : 'text-slate-200'
+                          }`}
+                        >
                           {pkg.price}
                         </span>
                       </div>
@@ -1168,8 +1222,8 @@ export default function App() {
                       {pkg.features.map((feat, idx) => (
                         <li key={idx} className="flex items-start gap-2.5">
                           <CheckCircle2
-                            className={`w-4 h-4 shrink-0 mt-0.5 ${
-                              isHighlighted ? 'text-blue-400' : 'text-emerald-400'
+                            className={`w-4 h-4 shrink-0 mt-0.5 transition-colors ${
+                              isHighlighted ? 'text-blue-400' : 'text-slate-500'
                             }`}
                           />
                           <span className="leading-relaxed">{feat}</span>
@@ -1181,14 +1235,18 @@ export default function App() {
                   {/* CTA Button */}
                   <div className="mt-8 pt-6 border-t border-slate-800/80">
                     <button
-                      onClick={() => handleSelectPackage(pkg)}
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleSelectPackage(pkg);
+                      }}
                       className={`w-full py-3.5 px-5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer ${
                         isHighlighted
                           ? 'text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 shadow-lg shadow-blue-500/25 active:scale-98'
                           : 'text-slate-200 bg-slate-800/90 hover:bg-slate-750 hover:text-white border border-slate-700 active:scale-98'
                       }`}
                     >
-                      <span>{pkg.cta}</span>
+                      <span>{isSelected ? 'Paket gewählt ✓' : pkg.cta}</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
@@ -1267,7 +1325,7 @@ export default function App() {
                 <div className="mt-6 space-y-3.5">
                   {/* WhatsApp */}
                   <a
-                    href={whatsappUrl}
+                    href={currentWhatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-between p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/30 hover:border-emerald-500/60 hover:bg-emerald-950/70 transition-all group shadow-sm"
@@ -1317,7 +1375,7 @@ export default function App() {
 
                   {/* E-Mail */}
                   <a
-                    href="mailto:hallo@sichtbarmitki.agency?cc=dirk.online.services@gmail.com"
+                    href={currentMailtoUrl}
                     className="flex items-center justify-between p-4 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-blue-500/50 hover:bg-slate-950/90 transition-all group shadow-sm"
                   >
                     <div className="flex items-center gap-3.5 min-w-0">
@@ -1374,6 +1432,39 @@ export default function App() {
                   </p>
                 </div>
 
+                {/* Gewähltes Paket Badge (falls vorausgewählt) */}
+                {selectedPackage && !formSubmitted && (
+                  <div className="mt-4 p-3.5 rounded-2xl bg-gradient-to-r from-blue-950/80 via-slate-900 to-indigo-950/60 border border-blue-500/40 flex items-center justify-between gap-3 text-xs shadow-md">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div className="w-7 h-7 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center shrink-0 text-blue-400">
+                        <Sparkles className="w-3.5 h-3.5" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[10px] uppercase font-bold text-blue-400 tracking-wider">
+                          Gewähltes Paket für Anfrage
+                        </div>
+                        <div className="text-white font-bold truncate">
+                          {selectedPackage.title} <span className="text-blue-300 font-normal">({selectedPackage.price})</span>
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedPackage(null);
+                        setFormData((prev) => ({
+                          ...prev,
+                          message: ''
+                        }));
+                      }}
+                      className="text-slate-400 hover:text-white underline text-[11px] shrink-0 cursor-pointer px-2 py-1 rounded hover:bg-slate-800/60 transition-colors"
+                      title="Paket-Auswahl entfernen"
+                    >
+                      Entfernen ✕
+                    </button>
+                  </div>
+                )}
+
                 {formSubmitted ? (
                   <div className="text-center py-12">
                     <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto mb-4">
@@ -1385,7 +1476,7 @@ export default function App() {
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                       <a
-                        href={whatsappUrl}
+                        href={currentWhatsappUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 transition-all"
@@ -1396,6 +1487,7 @@ export default function App() {
                       <button
                         onClick={() => {
                           setFormSubmitted(false);
+                          setSelectedPackage(null);
                           setFormData({ name: '', email: '', company: '', phone: '', message: '' });
                         }}
                         className="text-xs font-semibold text-slate-400 hover:text-white underline py-2 cursor-pointer"
