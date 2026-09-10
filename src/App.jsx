@@ -147,6 +147,12 @@ export default function App() {
 
       if (response.ok) {
         setFormSubmitted(true);
+        if (typeof window !== 'undefined' && window.dataLayer) {
+          window.dataLayer.push({
+            event: 'form_submission_success',
+            package_name: packageName
+          });
+        }
       } else {
         // Mailto fallback
         window.location.href = `mailto:hallo@sichtbarmitki.agency?cc=dirk.online.services@gmail.com&subject=${encodeURIComponent(

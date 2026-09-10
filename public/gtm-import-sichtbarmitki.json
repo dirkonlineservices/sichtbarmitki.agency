@@ -1,0 +1,285 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2026-09-10 12:35:00",
+  "containerVersion": {
+    "path": "accounts/6322475669/containers/GTM-WRLQVDM8/versions/0",
+    "accountId": "6322475669",
+    "containerId": "GTM-WRLQVDM8",
+    "containerVersionId": "0",
+    "container": {
+      "path": "accounts/6322475669/containers/GTM-WRLQVDM8",
+      "accountId": "6322475669",
+      "containerId": "GTM-WRLQVDM8",
+      "name": "sichtbarmitki.agency",
+      "publicId": "GTM-WRLQVDM8",
+      "usageContext": [
+        "WEB"
+      ]
+    },
+    "tag": [
+      {
+        "accountId": "6322475669",
+        "containerId": "GTM-WRLQVDM8",
+        "tagId": "1",
+        "name": "GA4 - Google Tag (G-F5ML2ZF2P6)",
+        "type": "googtag",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "sendPageView",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "tagId",
+            "value": "G-F5ML2ZF2P6"
+          }
+        ],
+        "firingTriggerId": [
+          "2147479553"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        }
+      },
+      {
+        "accountId": "6322475669",
+        "containerId": "GTM-WRLQVDM8",
+        "tagId": "2",
+        "name": "GA4 Event - WhatsApp Klick",
+        "type": "gaaw_event",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "measurementId",
+            "value": "G-F5ML2ZF2P6"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "click_whatsapp"
+          }
+        ],
+        "firingTriggerId": [
+          "10"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "6322475669",
+        "containerId": "GTM-WRLQVDM8",
+        "tagId": "3",
+        "name": "GA4 Event - Telefon Klick",
+        "type": "gaaw_event",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "measurementId",
+            "value": "G-F5ML2ZF2P6"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "click_phone"
+          }
+        ],
+        "firingTriggerId": [
+          "11"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "6322475669",
+        "containerId": "GTM-WRLQVDM8",
+        "tagId": "4",
+        "name": "GA4 Event - E-Mail Klick",
+        "type": "gaaw_event",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "measurementId",
+            "value": "G-F5ML2ZF2P6"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "click_email"
+          }
+        ],
+        "firingTriggerId": [
+          "12"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "6322475669",
+        "containerId": "GTM-WRLQVDM8",
+        "tagId": "5",
+        "name": "GA4 Event - Lead Generierung (Formular)",
+        "type": "gaaw_event",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "measurementId",
+            "value": "G-F5ML2ZF2P6"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "generate_lead"
+          }
+        ],
+        "firingTriggerId": [
+          "13"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      }
+    ],
+    "trigger": [
+      {
+        "accountId": "6322475669",
+        "containerId": "GTM-WRLQVDM8",
+        "triggerId": "10",
+        "name": "Klick - WhatsApp (wa.me)",
+        "type": "LINK_CLICK",
+        "filter": [
+          {
+            "type": "CONTAINS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Click URL}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "wa.me"
+              }
+            ]
+          }
+        ],
+        "waitForTags": {
+          "type": "BOOLEAN",
+          "value": "false"
+        },
+        "checkValidation": {
+          "type": "BOOLEAN",
+          "value": "false"
+        }
+      },
+      {
+        "accountId": "6322475669",
+        "containerId": "GTM-WRLQVDM8",
+        "triggerId": "11",
+        "name": "Klick - Telefon (tel:)",
+        "type": "LINK_CLICK",
+        "filter": [
+          {
+            "type": "STARTS_WITH",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Click URL}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "tel:"
+              }
+            ]
+          }
+        ],
+        "waitForTags": {
+          "type": "BOOLEAN",
+          "value": "false"
+        },
+        "checkValidation": {
+          "type": "BOOLEAN",
+          "value": "false"
+        }
+      },
+      {
+        "accountId": "6322475669",
+        "containerId": "GTM-WRLQVDM8",
+        "triggerId": "12",
+        "name": "Klick - E-Mail (mailto:)",
+        "type": "LINK_CLICK",
+        "filter": [
+          {
+            "type": "STARTS_WITH",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Click URL}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "mailto:"
+              }
+            ]
+          }
+        ],
+        "waitForTags": {
+          "type": "BOOLEAN",
+          "value": "false"
+        },
+        "checkValidation": {
+          "type": "BOOLEAN",
+          "value": "false"
+        }
+      },
+      {
+        "accountId": "6322475669",
+        "containerId": "GTM-WRLQVDM8",
+        "triggerId": "13",
+        "name": "Event - Formular erfolgreich abgesendet",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "form_submission_success"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "builtInVariable": [
+      {
+        "accountId": "6322475669",
+        "containerId": "GTM-WRLQVDM8",
+        "type": "CLICK_URL",
+        "name": "Click URL"
+      },
+      {
+        "accountId": "6322475669",
+        "containerId": "GTM-WRLQVDM8",
+        "type": "EVENT",
+        "name": "Event"
+      },
+      {
+        "accountId": "6322475669",
+        "containerId": "GTM-WRLQVDM8",
+        "type": "PAGE_URL",
+        "name": "Page URL"
+      }
+    ]
+  }
+}
