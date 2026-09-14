@@ -244,6 +244,7 @@ export default function App() {
       domain: "flow-der-stille.de",
       url: "https://flow-der-stille.de",
       logo: "/flow-der-stille-logo.png",
+      previewImage: "/flow-der-stille-preview.png",
       badge: "Android-App & Web-Plattform",
       badgeColor: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
       icon: Smartphone,
@@ -257,10 +258,30 @@ export default function App() {
       ]
     },
     {
+      title: "Zeit für Seelen",
+      subtitle: "Web-Präsenz & Google-Optimierung (Jacqueline Schmetzer)",
+      domain: "zeitfuerseelen.de",
+      url: "https://www.zeitfuerseelen.de",
+      logo: "/logo-zeitfuerseelen.png",
+      previewImage: "/zeitfuerseelen-preview.png",
+      badge: "Website & Google Consent Mode v2",
+      badgeColor: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+      icon: Globe,
+      description:
+        "Fokussierte, conversion-starke Web-Präsenz für Seelenbegleitung & Hypnose. Technische Google-Optimierung von Grund auf mit datenschutzkonformer Google Analytics & Consent Mode v2 Integration.",
+      highlights: [
+        "100% DSGVO-konform: Google Consent Mode v2 Cookie-Banner mit Standard-Ablehnung",
+        "Google Tag Manager (GTM) & GA4 für saubere, rechtssichere Nutzungsmessung",
+        "Google E-E-A-T Schema.org Structured Data für Vertrauenssignale & Auffindbarkeit",
+        "Fokussierte Web-Architektur mit extrem schnellen Ladezeiten & klarer Nutzerführung"
+      ]
+    },
+    {
       title: "MyMusicMoment24",
       subtitle: "Exklusive Musikerlebnisse & Buchungsplattform",
       domain: "mymusicmoment24.de",
       url: "https://mymusicmoment24.de",
+      previewImage: "/mymusicmoment24-preview.png",
       badge: "Web-Plattform & GEO",
       badgeColor: "bg-purple-500/15 text-purple-400 border-purple-500/30",
       icon: Music,
@@ -775,17 +796,17 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {references.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <div
                   key={idx}
-                  className="bg-gradient-to-br from-slate-900/90 via-slate-900/60 to-slate-950 border border-slate-800 hover:border-blue-500/40 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xl hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 flex flex-col justify-between"
+                  className="bg-gradient-to-br from-slate-900/90 via-slate-900/60 to-slate-950 border border-slate-800 hover:border-blue-500/40 rounded-3xl p-6 sm:p-7 lg:p-8 shadow-xl hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
                     {/* Header */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+                    <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
                       <span className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${item.badgeColor}`}>
                         {item.badge}
                       </span>
@@ -800,7 +821,37 @@ export default function App() {
                       </a>
                     </div>
 
-                    <div className="flex items-center gap-4 mb-5">
+                    {/* Screenshot Preview Mockup */}
+                    {item.previewImage && (
+                      <div className="relative mb-5 rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 shadow-inner group/preview hover:border-slate-700 transition-colors">
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900/90 border-b border-slate-800">
+                          <span className="w-2 h-2 rounded-full bg-rose-500/80 inline-block"></span>
+                          <span className="w-2 h-2 rounded-full bg-amber-500/80 inline-block"></span>
+                          <span className="w-2 h-2 rounded-full bg-emerald-500/80 inline-block"></span>
+                          <span className="text-[11px] font-mono text-slate-400 ml-2 truncate">{item.domain}</span>
+                        </div>
+                        <a
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block relative overflow-hidden aspect-[16/10] group/img"
+                        >
+                          <img
+                            src={item.previewImage}
+                            alt={`${item.title} Vorschau`}
+                            className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-slate-950/20 group-hover/img:bg-slate-950/0 transition-colors flex items-center justify-center opacity-0 group-hover/img:opacity-100 backdrop-blur-[1px]">
+                            <span className="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700 text-xs font-semibold text-white shadow-lg inline-flex items-center gap-1.5">
+                              Website öffnen <ExternalLink className="w-3.5 h-3.5" />
+                            </span>
+                          </div>
+                        </a>
+                      </div>
+                    )}
+
+                    <div className="flex items-center gap-3.5 mb-5">
                       {item.logo ? (
                         <div className="w-14 h-14 rounded-2xl bg-slate-950 border border-slate-800 p-2 flex items-center justify-center shrink-0 shadow-md">
                           <img src={item.logo} alt={`${item.title} Logo`} className="w-full h-full object-contain" />
