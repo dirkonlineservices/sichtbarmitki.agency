@@ -98,6 +98,7 @@ export default function App() {
     : "Hallo Dirk, ich interessiere mich für ein strategisches Erstgespräch zu GEO, KI-Sichtbarkeit und E-Commerce Beratung.";
 
   const currentWhatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(currentWhatsappText)}`;
+  const whatsappUrl = currentWhatsappUrl;
 
   const currentEmailSubject = selectedPackage
     ? `Anfrage für Paket [${selectedPackage.title}] - DS Online Services`
