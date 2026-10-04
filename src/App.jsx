@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CookieBanner from './components/CookieBanner.jsx';
 import ImpressumView from './components/ImpressumView.jsx';
 import DatenschutzView from './components/DatenschutzView.jsx';
+import CaseStudyFlowDerStilleView from './components/CaseStudyFlowDerStilleView.jsx';
 import {
   Sparkles,
   LineChart,
@@ -44,7 +45,7 @@ export default function App() {
   const [currentRoute, setCurrentRoute] = useState(() => {
     if (typeof window !== 'undefined') {
       const path = window.location.pathname.replace(/\/$/, '').toLowerCase();
-      if (path === '/impressum' || path === '/datenschutz') {
+      if (path === '/impressum' || path === '/datenschutz' || path === '/case-study-flow-der-stille') {
         return path;
       }
     }
@@ -71,7 +72,7 @@ export default function App() {
   useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname.replace(/\/$/, '').toLowerCase();
-      if (path === '/impressum' || path === '/datenschutz') {
+      if (path === '/impressum' || path === '/datenschutz' || path === '/case-study-flow-der-stille') {
         setCurrentRoute(path);
       } else {
         setCurrentRoute('/');
@@ -241,21 +242,22 @@ export default function App() {
   const references = [
     {
       title: "Flow der Stille",
-      subtitle: "Android-App & Progressive Web App (PWA)",
+      subtitle: "iOS- & Android-App & Progressive Web App",
       domain: "flow-der-stille.de",
       url: "https://flow-der-stille.de",
       logo: "/flow-der-stille-logo.png",
       previewImage: "/flow-der-stille-preview.png",
-      badge: "Android-App & Web-Plattform",
+      badge: "iOS, Android & Web-Plattform",
       badgeColor: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+      caseStudyUrl: "/case-study-flow-der-stille",
       icon: Smartphone,
       description:
-        "Vollständige Konzeption und technische Realisierung als native Android-App sowie performante Web-Plattform für geführte Meditationen und Achtsamkeits-Sessions.",
+        "Vollständige Konzeption und technische Realisierung als native iOS- und Android-App (Capacitor) sowie performante Web-Plattform mit Supabase-Backend und In-App-Bezahlsystem.",
       highlights: [
-        "Eigene native Android-App & PWA für unterbrechungsfreies Audio-Streaming",
-        "Maßgeschneiderter HTML5-Audio-Player mit stabiler Wiedergabe",
-        "Direkte Cloud-Datenbankanbindung ohne Drittanbieter-Abo-Kosten (kein n8n)",
-        "100% DSGVO-konform mit Google Consent Mode v2"
+        "Native iOS & Android App via Capacitor v7 aus 1 gemeinsamen Codebase",
+        "Unterbrechungsfreier Background-Audio-Player (Lock-Screen & Mute)",
+        "Apple StoreKit & Google Play Billing In-App-Käufe ('Restore Purchases')",
+        "100% DSGVO-konform mit Google Consent Mode v2 & 0-Vulnerability Standard"
       ]
     },
     {
@@ -470,6 +472,27 @@ export default function App() {
           onNavigateHome={() => navigate('/')}
           onNavigateImpressum={() => navigate('/impressum')}
           onOpenCookies={() => setCookieBannerManualOpen(true)}
+        />
+        <CookieBanner
+          isOpenManually={cookieBannerManualOpen}
+          onCloseManual={() => setCookieBannerManualOpen(false)}
+        />
+      </>
+    );
+  }
+
+  if (currentRoute === '/case-study-flow-der-stille') {
+    return (
+      <>
+        <CaseStudyFlowDerStilleView
+          onNavigateHome={() => navigate('/')}
+          onOpenContact={() => {
+            navigate('/');
+            setTimeout(() => {
+              const el = document.getElementById('kontakt');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+          }}
         />
         <CookieBanner
           isOpenManually={cookieBannerManualOpen}
@@ -892,13 +915,23 @@ export default function App() {
                       <span>Live ansehen</span>
                       <ExternalLink className="w-4 h-4" />
                     </a>
-                    <a
-                      href="#kontakt"
-                      className="text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1"
-                    >
-                      <span>Ähnliches Projekt planen</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </a>
+                    {item.caseStudyUrl ? (
+                      <button
+                        onClick={() => navigate(item.caseStudyUrl)}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/25 px-3 py-2 rounded-xl transition cursor-pointer"
+                      >
+                        <span>Case Study lesen</span>
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </button>
+                    ) : (
+                      <a
+                        href="#kontakt"
+                        className="text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1"
+                      >
+                        <span>Ähnliches Projekt planen</span>
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </a>
+                    )}
                   </div>
                 </div>
               );

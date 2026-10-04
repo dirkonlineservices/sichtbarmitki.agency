@@ -25,4 +25,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
+
+  <!-- Case Study: Flow der Stille -->
+  <url>
+    <loc>https://www.sichtbarmitki.agency/case-study-flow-der-stille/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>
